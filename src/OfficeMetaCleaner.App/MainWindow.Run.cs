@@ -13,13 +13,13 @@ public partial class MainWindow : Window
 
         var inPlace = InPlaceCheck.IsChecked == true;
         var all = Items.ToList();
-        var items = all.Where(i => !string.Equals(i.Status, "Готово", StringComparison.Ordinal)).ToList();
+        var items = all.Where(i => !string.Equals(i.Status, L10n.StatusDone, StringComparison.Ordinal)).ToList();
         var alreadyDone = all.Count - items.Count;
 
         if (items.Count == 0)
         {
             MessageBox.Show(this,
-                "Все файлы из списка уже обработаны. Нажмите «Сбросить отметки», чтобы обработать их заново.",
+                L10n.Gui_AllDone,
                 "OfficeMetaCleaner", MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
@@ -29,7 +29,7 @@ public partial class MainWindow : Window
 
         if (useFolder && string.IsNullOrWhiteSpace(outFolder))
         {
-            MessageBox.Show(this, "Укажите папку для результата.", "OfficeMetaCleaner",
+            MessageBox.Show(this, L10n.Gui_NeedFolder, "OfficeMetaCleaner",
                 MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
@@ -74,16 +74,16 @@ public partial class MainWindow : Window
                 {
                     Dispatcher.Invoke(() =>
                     {
-                        item.Status = "Ожидание";
-                        item.Detail = "Файл открыт — жду закрытия…";
+                        item.Status = L10n.StatusWaiting;
+                        item.Detail = L10n.Gui_WaitDetail;
                     });
 
                     if (!FileBusy.WaitUntilFree(item.FilePath, FileBusy.DefaultPollInterval, token))
                     {
                         Dispatcher.Invoke(() =>
                         {
-                            item.Status = "Пропущен";
-                            item.Detail = "Ожидание отменено";
+                            item.Status = L10n.StatusSkipped;
+                            item.Detail = L10n.Gui_CancelledDetail;
                             item.Result = null;
                             skipped++;
                         });
@@ -93,7 +93,7 @@ public partial class MainWindow : Window
                         Dispatcher.Invoke(() =>
                         {
                             Progress.Value = cancelled;
-                            SummaryText.Text = $"Обработано {cancelled} из {items.Count}…";
+                            SummaryText.Text = string.Format(L10n.Gui_ProcessedOf, cancelled, items.Count);
                         });
                         continue;
                     }
@@ -101,7 +101,7 @@ public partial class MainWindow : Window
 
                 Dispatcher.Invoke(() =>
                 {
-                    item.Status = "Обработка";
+                    item.Status = L10n.StatusProcessing;
                     item.Detail = "…";
                 });
 
@@ -121,12 +121,12 @@ public partial class MainWindow : Window
 
                         if (result.Success)
                         {
-                            item.Status = "Готово";
+                            item.Status = L10n.StatusDone;
                             succeeded++;
                         }
                         else
                         {
-                            item.Status = "Пропущен";
+                            item.Status = L10n.StatusSkipped;
                             skipped++;
                         }
 
@@ -137,7 +137,7 @@ public partial class MainWindow : Window
                 {
                     Dispatcher.Invoke(() =>
                     {
-                        item.Status = "Ошибка";
+                        item.Status = L10n.StatusError;
                         skipped++;
                         item.Detail = ex.Message;
                     });
@@ -148,7 +148,7 @@ public partial class MainWindow : Window
                 Dispatcher.Invoke(() =>
                 {
                     Progress.Value = current;
-                    SummaryText.Text = $"Обработано {current} из {items.Count}…";
+                    SummaryText.Text = string.Format(L10n.Gui_ProcessedOf, current, items.Count);
                 });
             }
         });
@@ -181,8 +181,8 @@ public partial class MainWindow : Window
 
         SetBusy(false);
 
-        SummaryText.Text = $"Готово: очищено {succeeded}, пропущено {skipped} из {items.Count}"
-                           + (alreadyDone > 0 ? $" (ранее обработано, пропущено: {alreadyDone})" : string.Empty);
+        SummaryText.Text = string.Format(L10n.Gui_DoneSummary, succeeded, skipped, items.Count)
+                           + (alreadyDone > 0 ? string.Format(L10n.Gui_AlreadyDone, alreadyDone) : string.Empty);
 
         UpdateUi();
     }
@@ -192,23 +192,23 @@ public partial class MainWindow : Window
         var parts = new List<string>();
 
         if (result.DroppedParts > 0)
-            parts.Add($"удалено частей: {result.DroppedParts}");
+            parts.Add(string.Format(L10n.Gui_DroppedParts, result.DroppedParts));
         if (result.ScrubbedParts > 0)
-            parts.Add($"очищено элементов: {result.ScrubbedParts}");
+            parts.Add(string.Format(L10n.Gui_ScrubbedParts, result.ScrubbedParts));
 
         var text = parts.Count > 0
             ? string.Join(", ", parts)
             : result.Actions.Count > 0
-                ? $"выполнено операций: {result.Actions.Count}"
-                : "нечего очищать";
+                ? string.Format(L10n.Gui_OperationsDone, result.Actions.Count)
+                : L10n.Gui_NothingToClean;
 
-        if (result.Warnings.Count > 0 && !result.Warnings.All(w => w.StartsWith("Результат записывается", StringComparison.Ordinal)))
+        if (result.Warnings.Count > 0 && !result.Warnings.All(w => w.StartsWith(L10n.Core_InPlaceWarning, StringComparison.Ordinal)))
             text += " — " + result.Warnings[0];
 
         if (options.DryRun)
-            text += " (тестовый режим)";
+            text += L10n.Gui_DryRunTag;
         else if (result.ReplacedInPlace)
-            text += " → файл заменён";
+            text += L10n.Gui_ReplacedTag;
         else if (result.OutputPath is not null)
             text += $" → {Path.GetFileName(result.OutputPath)}";
 

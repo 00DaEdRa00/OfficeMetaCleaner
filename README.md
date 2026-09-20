@@ -155,6 +155,7 @@ flowchart LR
 -  ждать закрытия занятых файлов *(выкл.)*
 -  зачистка сведений о пользователе в Word/PowerPoint *(вкл.)*
 -  заменять исходные файлы *(выкл. — по умолчанию пишется копия)*
+-  🌐 язык интерфейса: система / русский / English *(по умолчанию — язык системы; смена применяется после перезапуска)*
 
 Поведение вывода:
 
@@ -167,7 +168,7 @@ flowchart LR
 ## ⌨️ Консольная утилита `omc`
 
 ```bash
-omc clean <файл|папка> [--out <папка>] [--in-place] [--dry-run] [--recursive] [--remove-signatures] [--strip-images|--keep-images] [--wait]
+omc clean <файл|папка> [--out <папка>] [--in-place] [--dry-run] [--recursive] [--remove-signatures] [--strip-images|--keep-images] [--wait] [--lang ru|en|auto]
 ```
 
 Примеры:
@@ -203,6 +204,13 @@ omc clean отчет.xlsx --keep-images
 ```
 
 `Ctrl+C` во время `--wait` — аккуратно пропускает текущий занятый файл.
+
+🌐 **Язык сообщений** — авто: на англоязычной Windows — английский, иначе русский.
+В консоли переопределяется флагом `--lang ru|en|auto`:
+
+```bash
+omc clean договор.docx --dry-run --lang en
+```
 
 ---
 

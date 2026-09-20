@@ -25,6 +25,8 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = this;
+        InitLanguage();
+        ApplyTexts();
         Items.CollectionChanged += (_, _) => UpdateUi();
         UpdateUi();
     }

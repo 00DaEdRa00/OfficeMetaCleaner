@@ -17,6 +17,26 @@ internal static partial class Program
     {
         try { Console.OutputEncoding = System.Text.Encoding.UTF8; } catch { /* non-console host */ }
 
+        // язык разбираем до любого вывода, чтобы и help, и ошибки парсинга были локализованы
+        var langPref = AppLanguage.Auto;
+        string? langRaw = null;
+        for (var i = 0; i < args.Length; i++)
+        {
+            if (!string.Equals(args[i], "--lang", StringComparison.Ordinal))
+                continue;
+            langRaw = i + 1 < args.Length ? args[i + 1] : string.Empty;
+        }
+
+        if (langRaw is not null && !TryParseLanguage(langRaw, out langPref))
+        {
+            L10n.Apply(AppLanguage.Auto);
+            Console.Error.WriteLine(string.Format(L10n.Cli_InvalidLang, langRaw));
+            PrintUsage();
+            return 1;
+        }
+
+        L10n.Apply(langPref);
+
         if (args.Length == 0 || args[0] is "-h" or "--help" or "help")
         {
             PrintUsage();
@@ -25,7 +45,7 @@ internal static partial class Program
 
         if (!string.Equals(args[0], "clean", StringComparison.OrdinalIgnoreCase))
         {
-            Console.Error.WriteLine($"Неизвестная команда: {args[0]}");
+            Console.Error.WriteLine(string.Format(L10n.Cli_UnknownCommand, args[0]));
             PrintUsage();
             return 1;
         }
@@ -46,7 +66,7 @@ internal static partial class Program
                 case "--out":
                     if (i + 1 >= args.Length)
                     {
-                        Console.Error.WriteLine("--out требует значение");
+                        Console.Error.WriteLine(L10n.Cli_OutNeedsValue);
                         return 1;
                     }
                     outDir = args[++i];
@@ -72,6 +92,9 @@ internal static partial class Program
                 case "--wait":
                     wait = true;
                     break;
+                case "--lang":
+                    i++; // значение уже разобрано в пре-скане выше
+                    break;
                 default:
                     input ??= args[i];
                     break;
@@ -80,14 +103,14 @@ internal static partial class Program
 
         if (input is null)
         {
-            Console.Error.WriteLine("Не указан входной файл или папка.");
+            Console.Error.WriteLine(L10n.Cli_NoInput);
             PrintUsage();
             return 1;
         }
 
         if (inPlace && outDir is not null)
         {
-            Console.Error.WriteLine("--in-place и --out несовместимы: при замене файла папка результата не используется.");
+            Console.Error.WriteLine(L10n.Cli_InPlaceOutConflict);
             return 1;
         }
 
@@ -121,11 +144,11 @@ internal static partial class Program
 
             if (files.Count == 0)
             {
-                Console.WriteLine("Подходящих файлов Office не найдено.");
+                Console.WriteLine(L10n.Cli_NoFiles);
                 return 0;
             }
 
-            Console.WriteLine($"Найдено файлов: {files.Count}");
+            Console.WriteLine(string.Format(L10n.Cli_FoundFiles, files.Count));
 
             // с --wait сначала свободные, занятые — во вторую очередь с ожиданием закрытия
             var free = new List<string>();
@@ -136,7 +159,7 @@ internal static partial class Program
                     (FileBusy.FindOwnerFile(f) is null && !FileBusy.IsBusy(f) ? free : busy).Add(f);
 
                 if (busy.Count > 0)
-                    Console.WriteLine($"Занятых файлов: {busy.Count} — сначала обработаю свободные.");
+                    Console.WriteLine(string.Format(L10n.Cli_BusyFiles, busy.Count));
             }
             else
             {
@@ -179,27 +202,39 @@ internal static partial class Program
         }
         else
         {
-            Console.Error.WriteLine($"Путь не найден: {input}");
+            Console.Error.WriteLine(string.Format(L10n.Cli_PathNotFound, input));
             return 1;
         }
 
         return exitCode;
     }
 
+    private static bool TryParseLanguage(string raw, out AppLanguage language)
+    {
+        switch (raw.ToLowerInvariant())
+        {
+            case "ru": language = AppLanguage.Russian; return true;
+            case "en": language = AppLanguage.English; return true;
+            case "auto": language = AppLanguage.Auto; return true;
+            default: language = AppLanguage.Auto; return false;
+        }
+    }
+
     private static void PrintUsage()
     {
-        Console.WriteLine("omc clean <файл|папка> [--out <папка>] [--in-place] [--dry-run] [--recursive] [--remove-signatures] [--strip-images|--keep-images] [--wait]");
+        Console.WriteLine(L10n.Cli_Usage);
         Console.WriteLine();
-        Console.WriteLine("Удаляет метаданные из файлов Microsoft Office, сохраняя файлы рабочими.");
-        Console.WriteLine("Поддерживаются OOXML (.docx .xlsx .pptx .vsdx и др.), legacy OLE/CFB (.doc .xls .ppt .vsd)");
-        Console.WriteLine("и базы Microsoft Access (.accdb .mdb) — для последних нужен установленный Access/ACE.");
-        Console.WriteLine("  --out <папка>          куда писать результат (по умолчанию <файл>.clean рядом)");
-        Console.WriteLine("  --in-place             заменить исходный файл, не создавая копию");
-        Console.WriteLine("  --dry-run              показать, что будет удалено, не записывая файл");
-        Console.WriteLine("  --recursive            обходить папку рекурсивно");
-        Console.WriteLine("  --remove-signatures    удалять _xmlsignatures/* (делает подписи недействительными)");
-        Console.WriteLine("  --strip-images         удалять EXIF/XMP у изображений внутри пакета (включено по умолчанию)");
-        Console.WriteLine("  --keep-images          не трогать метаданные изображений");
-        Console.WriteLine("  --wait                 ждать закрытия занятых файлов (Ctrl+C — пропустить файл)");
+        Console.WriteLine(L10n.Cli_HelpAbout);
+        Console.WriteLine(L10n.Cli_HelpFormats);
+        Console.WriteLine(L10n.Cli_HelpAccess);
+        Console.WriteLine(L10n.Cli_HelpOut);
+        Console.WriteLine(L10n.Cli_HelpInPlace);
+        Console.WriteLine(L10n.Cli_HelpDryRun);
+        Console.WriteLine(L10n.Cli_HelpRecursive);
+        Console.WriteLine(L10n.Cli_HelpSignatures);
+        Console.WriteLine(L10n.Cli_HelpStrip);
+        Console.WriteLine(L10n.Cli_HelpKeep);
+        Console.WriteLine(L10n.Cli_HelpWait);
+        Console.WriteLine(L10n.Cli_HelpLang);
     }
 }

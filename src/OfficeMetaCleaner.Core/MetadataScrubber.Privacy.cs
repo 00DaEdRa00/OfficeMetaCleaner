@@ -33,7 +33,7 @@ public static partial class MetadataScrubber
 
         result.ScrubbedParts++;
         result.Actions.Add(new ScrubAction("set-privacy-flag", name,
-            "Включено удаление сведений о пользователе при сохранении"));
+            L10n.Core_PrivacyFlagDetail));
         return Serialize(doc);
     }
 
@@ -59,7 +59,7 @@ public static partial class MetadataScrubber
 
         result.ScrubbedParts++;
         result.Actions.Add(new ScrubAction("set-privacy-flag", name,
-            "Включено удаление сведений о пользователе при сохранении"));
+            L10n.Core_PrivacyFlagDetail));
         return Serialize(doc);
     }
 

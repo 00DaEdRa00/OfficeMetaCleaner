@@ -9,12 +9,13 @@ namespace OfficeMetaCleaner.App;
 public sealed class ScrubItem : INotifyPropertyChanged
 {
     private string _container = "—";
-    private string _status = "Ожидает";
+    private string _status;
     private string _detail = "—";
 
     public ScrubItem(string filePath)
     {
         FilePath = filePath;
+        _status = L10n.StatusPending;
     }
 
     public string FilePath { get; }

@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <!-- Core: scrub results -->
+  <data name="Core_FileNotFound" xml:space="preserve">
+    <value>File not found: {0}</value>
+  </data>
+  <data name="Core_UnknownContainer" xml:space="preserve">
+    <value>Could not detect the container format. The file was left unchanged.</value>
+  </data>
+  <data name="Core_InPlaceWarning" xml:space="preserve">
+    <value>The result overwrites the source file.</value>
+  </data>
+  <data name="Core_DropPartDetail" xml:space="preserve">
+    <value>Container metadata removed</value>
+  </data>
+  <data name="Core_StripImageDetail" xml:space="preserve">
+    <value>Image EXIF/XMP/comments removed</value>
+  </data>
+  <data name="Core_WriteFailed" xml:space="preserve">
+    <value>Failed to write the result: {0}</value>
+  </data>
+  <data name="Core_PartFailed" xml:space="preserve">
+    <value>Failed to process part {0}: {1}</value>
+  </data>
+  <data name="Core_ScrubXmlDetail" xml:space="preserve">
+    <value>Authorship/rsid attributes removed</value>
+  </data>
+  <data name="Core_ContentTypesDetail" xml:space="preserve">
+    <value>Overrides removed: {0}</value>
+  </data>
+  <data name="Core_RelsDetail" xml:space="preserve">
+    <value>Links to removed parts deleted: {0}</value>
+  </data>
+  <data name="Core_PrivacyFlagDetail" xml:space="preserve">
+    <value>Remove-personal-info-on-save enabled</value>
+  </data>
+  <data name="Core_CfbWouldClear" xml:space="preserve">
+    <value>Stream will be replaced with an empty property set</value>
+  </data>
+  <data name="Core_CfbStreamMissing" xml:space="preserve">
+    <value>Stream {0} not found.</value>
+  </data>
+  <data name="Core_CfbStreamSkipped" xml:space="preserve">
+    <value>Stream {0} not found — skipped.</value>
+  </data>
+  <data name="Core_CfbError" xml:space="preserve">
+    <value>CFB cleanup error: {0}</value>
+  </data>
+  <data name="Core_CfbCleared" xml:space="preserve">
+    <value>Metadata cleared ({0} -&gt; {1} bytes, slack zeroed)</value>
+  </data>
+  <data name="Core_AceWindowsOnly" xml:space="preserve">
+    <value>Access database cleanup is Windows-only. The file was left unchanged.</value>
+  </data>
+  <data name="Core_AceNoDriver" xml:space="preserve">
+    <value>Access driver (DAO) not found. Cleaning .accdb/.mdb requires Microsoft Access or Microsoft Access Database Engine. The file was left unchanged.</value>
+  </data>
+  <data name="Core_AceLaunchFailed" xml:space="preserve">
+    <value>Failed to start DAO: {0}</value>
+  </data>
+  <data name="Core_AceNoEngine" xml:space="preserve">
+    <value>Failed to create the DAO object.</value>
+  </data>
+  <data name="Core_AceError" xml:space="preserve">
+    <value>Access database cleanup error: {0}</value>
+  </data>
+  <data name="Core_AceWouldDelete" xml:space="preserve">
+    <value>Property will be removed</value>
+  </data>
+  <data name="Core_AceDeleted" xml:space="preserve">
+    <value>Property removed</value>
+  </data>
+  <data name="Core_AceDeleteFailed" xml:space="preserve">
+    <value>Failed to remove {0}.{1}: {2}</value>
+  </data>
+  <data name="Core_NothingFound" xml:space="preserve">
+    <value>Nothing to clean: no metadata found.</value>
+  </data>
+  <!-- CLI: argument parsing and help -->
+  <data name="Cli_UnknownCommand" xml:space="preserve">
+    <value>Unknown command: {0}</value>
+  </data>
+  <data name="Cli_OutNeedsValue" xml:space="preserve">
+    <value>--out requires a value</value>
+  </data>
+  <data name="Cli_NoInput" xml:space="preserve">
+    <value>No input file or folder specified.</value>
+  </data>
+  <data name="Cli_InPlaceOutConflict" xml:space="preserve">
+    <value>--in-place and --out are incompatible: replacing the file uses no output folder.</value>
+  </data>
+  <data name="Cli_InvalidLang" xml:space="preserve">
+    <value>Unknown language: {0} (expected ru|en|auto).</value>
+  </data>
+  <data name="Cli_NoFiles" xml:space="preserve">
+    <value>No suitable Office files found.</value>
+  </data>
+  <data name="Cli_FoundFiles" xml:space="preserve">
+    <value>Files found: {0}</value>
+  </data>
+  <data name="Cli_BusyFiles" xml:space="preserve">
+    <value>Locked files: {0} — processing the free ones first.</value>
+  </data>
+  <data name="Cli_PathNotFound" xml:space="preserve">
+    <value>Path not found: {0}</value>
+  </data>
+  <data name="Cli_HelpAbout" xml:space="preserve">
+    <value>Removes metadata from Microsoft Office files while keeping them working.</value>
+  </data>
+  <data name="Cli_HelpFormats" xml:space="preserve">
+    <value>Supports OOXML (.docx .xlsx .pptx .vsdx etc.) and legacy OLE/CFB (.doc .xls .ppt .vsd)</value>
+  </data>
+  <data name="Cli_HelpAccess" xml:space="preserve">
+    <value>plus Microsoft Access databases (.accdb .mdb) — those need installed Access/ACE.</value>
+  </data>
+  <data name="Cli_HelpOut" xml:space="preserve">
+    <value>  --out &lt;folder&gt;         where to write the result (default: &lt;file&gt;.clean next to it)</value>
+  </data>
+  <data name="Cli_HelpInPlace" xml:space="preserve">
+    <value>  --in-place             replace the source file instead of writing a copy</value>
+  </data>
+  <data name="Cli_HelpDryRun" xml:space="preserve">
+    <value>  --dry-run              show what would be removed without writing the file</value>
+  </data>
+  <data name="Cli_HelpRecursive" xml:space="preserve">
+    <value>  --recursive            scan the folder recursively</value>
+  </data>
+  <data name="Cli_HelpSignatures" xml:space="preserve">
+    <value>  --remove-signatures    remove _xmlsignatures/* (invalidates signatures)</value>
+  </data>
+  <data name="Cli_HelpStrip" xml:space="preserve">
+    <value>  --strip-images         strip EXIF/XMP from images inside the package (on by default)</value>
+  </data>
+  <data name="Cli_HelpKeep" xml:space="preserve">
+    <value>  --keep-images          leave image metadata alone</value>
+  </data>
+  <data name="Cli_HelpWait" xml:space="preserve">
+    <value>  --wait                 wait for locked files to close (Ctrl+C — skip the file)</value>
+  </data>
+  <data name="Cli_HelpLang" xml:space="preserve">
+    <value>  --lang ru|en|auto      message language (default auto — system language)</value>
+  </data>
+  <data name="Cli_Usage" xml:space="preserve">
+    <value>omc clean &lt;file|folder&gt; [--out &lt;folder&gt;] [--in-place] [--dry-run] [--recursive] [--remove-signatures] [--strip-images|--keep-images] [--wait] [--lang ru|en|auto]</value>
+  </data>
+  <!-- CLI: execution -->
+  <data name="Cli_WaitLocked" xml:space="preserve">
+    <value>Busy, waiting for it to close: {0}</value>
+  </data>
+  <data name="Cli_WaitOfficeOpen" xml:space="preserve">
+    <value>  the document is open in Office (lock file present) — please close it</value>
+  </data>
+  <data name="Cli_WaitRunning" xml:space="preserve">
+    <value>  running: {0}</value>
+  </data>
+  <data name="Cli_WaitSkip" xml:space="preserve">
+    <value>  Ctrl+C — skip the file</value>
+  </data>
+  <data name="Cli_WaitCancelled" xml:space="preserve">
+    <value>  skipped (wait cancelled)</value>
+  </data>
+  <data name="Cli_WaitFreed" xml:space="preserve">
+    <value>  file released, processing…</value>
+  </data>
+  <data name="Cli_Error" xml:space="preserve">
+    <value>ERROR: {0}</value>
+  </data>
+  <data name="Cli_Container" xml:space="preserve">
+    <value>Container: {0}</value>
+  </data>
+  <data name="Cli_Dropped" xml:space="preserve">
+    <value>parts dropped: {0}</value>
+  </data>
+  <data name="Cli_Scrubbed" xml:space="preserve">
+    <value>items scrubbed: {0}</value>
+  </data>
+  <data name="Cli_Operations" xml:space="preserve">
+    <value>operations performed: {0}</value>
+  </data>
+  <data name="Cli_NothingToClean" xml:space="preserve">
+    <value>nothing to clean</value>
+  </data>
+  <data name="Cli_DryRunMode" xml:space="preserve">
+    <value>Dry-run mode: the file was not written.</value>
+  </data>
+  <data name="Cli_Replaced" xml:space="preserve">
+    <value>File replaced: {0}</value>
+  </data>
+  <data name="Cli_Written" xml:space="preserve">
+    <value>Written: {0}</value>
+  </data>
+  <data name="Cli_NewSize" xml:space="preserve">
+    <value>New size: {0} bytes</value>
+  </data>
+  <data name="Cli_SizeBeforeAfter" xml:space="preserve">
+    <value>Size: {0} -&gt; {1} bytes</value>
+  </data>
+  <!-- GUI -->
+  <data name="Gui_Title" xml:space="preserve">
+    <value>OfficeMetaCleaner — Office metadata cleanup</value>
+  </data>
+  <data name="Gui_Subtitle" xml:space="preserve">
+    <value>Removes metadata from Microsoft Office files while keeping them working. Drag files or folders into the window.</value>
+  </data>
+  <data name="Gui_SettingsTip" xml:space="preserve">
+    <value>Cleanup settings</value>
+  </data>
+  <data name="Gui_OptImages" xml:space="preserve">
+    <value>Remove image EXIF</value>
+  </data>
+  <data name="Gui_HintImages" xml:space="preserve">
+    <value>Removes hidden photo data inside the document: shooting location, camera model, date. The pictures themselves stay intact.</value>
+  </data>
+  <data name="Gui_OptSignatures" xml:space="preserve">
+    <value>Remove digital signatures</value>
+  </data>
+  <data name="Gui_HintSignatures" xml:space="preserve">
+    <value>Removes embedded digital signatures. Note: any cleanup invalidates signatures anyway.</value>
+  </data>
+  <data name="Gui_OptWait" xml:space="preserve">
+    <value>Wait for locked files to close</value>
+  </data>
+  <data name="Gui_HintWait" xml:space="preserve">
+    <value>If a file is open in Word or Excel, the app waits until you close it and cleans automatically. Free files are processed first.</value>
+  </data>
+  <data name="Gui_OptPrivacy" xml:space="preserve">
+    <value>Strip personal info in Word/PowerPoint</value>
+  </data>
+  <data name="Gui_HintPrivacy" xml:space="preserve">
+    <value>Sets the “remove author info on save” flag in Word and PowerPoint files — Office itself erases your name on every save, even after edits. Excel has no such flag.</value>
+  </data>
+  <data name="Gui_Language" xml:space="preserve">
+    <value>Language:</value>
+  </data>
+  <data name="Gui_LangSystem" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Gui_LangRestart" xml:space="preserve">
+    <value>The language change applies after restart.</value>
+  </data>
+  <data name="Gui_ColFile" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="Gui_ColType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Gui_ColStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Gui_ColDetails" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Gui_EmptyHint" xml:space="preserve">
+    <value>Drop .docx .xlsx .pptx .doc .xls .ppt files here — or add them with the buttons below</value>
+  </data>
+  <data name="Gui_FilesSection" xml:space="preserve">
+    <value>File handling</value>
+  </data>
+  <data name="Gui_InPlace" xml:space="preserve">
+    <value>Replace source files</value>
+  </data>
+  <data name="Gui_Beside" xml:space="preserve">
+    <value>Output next to the source</value>
+  </data>
+  <data name="Gui_ToFolder" xml:space="preserve">
+    <value>To folder:</value>
+  </data>
+  <data name="Gui_AddFiles" xml:space="preserve">
+    <value>Add files</value>
+  </data>
+  <data name="Gui_AddFolder" xml:space="preserve">
+    <value>Add folder</value>
+  </data>
+  <data name="Gui_RemoveSelected" xml:space="preserve">
+    <value>Remove selected</value>
+  </data>
+  <data name="Gui_ClearList" xml:space="preserve">
+    <value>Clear list</value>
+  </data>
+  <data name="Gui_ResetMarks" xml:space="preserve">
+    <value>Reset marks</value>
+  </data>
+  <data name="Gui_OpenResult" xml:space="preserve">
+    <value>Open result</value>
+  </data>
+  <data name="Gui_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Gui_Clean" xml:space="preserve">
+    <value>Clean metadata</value>
+  </data>
+  <data name="Gui_NoFiles" xml:space="preserve">
+    <value>No files selected</value>
+  </data>
+  <data name="Gui_SelectedN" xml:space="preserve">
+    <value>Files selected: {0}</value>
+  </data>
+  <data name="Gui_ProcessedOf" xml:space="preserve">
+    <value>Processed {0} of {1}…</value>
+  </data>
+  <data name="Gui_DoneSummary" xml:space="preserve">
+    <value>Done: {0} cleaned, {1} skipped of {2}</value>
+  </data>
+  <data name="Gui_AlreadyDone" xml:space="preserve">
+    <value> (previously done, skipped: {0})</value>
+  </data>
+  <data name="Gui_AllDone" xml:space="preserve">
+    <value>All files in the list are already processed. Click “Reset marks” to process them again.</value>
+  </data>
+  <data name="Gui_NeedFolder" xml:space="preserve">
+    <value>Specify the result folder.</value>
+  </data>
+  <data name="Gui_NoOfficeFiles" xml:space="preserve">
+    <value>No suitable Office files found.</value>
+  </data>
+  <data name="Gui_NotProcessed" xml:space="preserve">
+    <value>The file is not processed yet — no details available.</value>
+  </data>
+  <data name="Status_Pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="Status_Waiting" xml:space="preserve">
+    <value>Waiting</value>
+  </data>
+  <data name="Status_Processing" xml:space="preserve">
+    <value>Processing</value>
+  </data>
+  <data name="Status_Done" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="Status_Skipped" xml:space="preserve">
+    <value>Skipped</value>
+  </data>
+  <data name="Status_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Gui_WaitDetail" xml:space="preserve">
+    <value>The file is open — waiting for it to close…</value>
+  </data>
+  <data name="Gui_CancelledDetail" xml:space="preserve">
+    <value>Wait cancelled</value>
+  </data>
+  <data name="Gui_PickFilesTitle" xml:space="preserve">
+    <value>Select Microsoft Office files</value>
+  </data>
+  <data name="Gui_FilesFilter" xml:space="preserve">
+    <value>Office files</value>
+  </data>
+  <data name="Gui_AllFiles" xml:space="preserve">
+    <value>All files</value>
+  </data>
+  <data name="Gui_PickFolderTitle" xml:space="preserve">
+    <value>Select the folder with files</value>
+  </data>
+  <data name="Gui_SaveTitle" xml:space="preserve">
+    <value>Where to save the result</value>
+  </data>
+  <data name="Gui_DetailsTitle" xml:space="preserve">
+    <value>Cleanup details</value>
+  </data>
+  <data name="Gui_DetailsFor" xml:space="preserve">
+    <value>Details — {0}</value>
+  </data>
+  <data name="Gui_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Gui_DroppedParts" xml:space="preserve">
+    <value>parts dropped: {0}</value>
+  </data>
+  <data name="Gui_ScrubbedParts" xml:space="preserve">
+    <value>items scrubbed: {0}</value>
+  </data>
+  <data name="Gui_OperationsDone" xml:space="preserve">
+    <value>operations performed: {0}</value>
+  </data>
+  <data name="Gui_NothingToClean" xml:space="preserve">
+    <value>nothing to clean</value>
+  </data>
+  <data name="Gui_DryRunTag" xml:space="preserve">
+    <value> (dry run)</value>
+  </data>
+  <data name="Gui_ReplacedTag" xml:space="preserve">
+    <value> → file replaced</value>
+  </data>
+</root>

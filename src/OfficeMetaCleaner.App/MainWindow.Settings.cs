@@ -1,5 +1,6 @@
 using System.Windows;
 using Microsoft.Win32;
+using OfficeMetaCleaner.Core;
 
 namespace OfficeMetaCleaner.App;
 
@@ -29,7 +30,7 @@ public partial class MainWindow : Window
 
     private void Browse_Click(object sender, RoutedEventArgs e)
     {
-        var dialog = new OpenFolderDialog { Title = "Куда сохранять результат" };
+        var dialog = new OpenFolderDialog { Title = L10n.Gui_SaveTitle };
         if (dialog.ShowDialog(this) == true)
             OutputFolderBox.Text = dialog.FolderName;
     }

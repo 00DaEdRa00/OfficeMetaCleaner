@@ -44,14 +44,14 @@ public static partial class MetadataScrubber
             if (changed)
             {
                 result.ScrubbedParts++;
-                result.Actions.Add(new ScrubAction("scrub-xml", name, "Удалены атрибуты авторства/rsid"));
+                result.Actions.Add(new ScrubAction("scrub-xml", name, L10n.Core_ScrubXmlDetail));
             }
 
             return Serialize(doc);
         }
         catch (Exception ex)
         {
-            result.Warnings.Add($"Не удалось обработать часть {name}: {ex.Message}");
+            result.Warnings.Add(string.Format(L10n.Core_PartFailed, name, ex.Message));
             return text;
         }
     }
@@ -113,7 +113,7 @@ public static partial class MetadataScrubber
         if (removed > 0)
         {
             result.Actions.Add(new ScrubAction("update-content-types", "[Content_Types].xml",
-                $"Удалено переопределений: {removed}"));
+                string.Format(L10n.Core_ContentTypesDetail, removed)));
         }
 
         return Serialize(doc);
@@ -150,7 +150,7 @@ public static partial class MetadataScrubber
         if (removed > 0)
         {
             result.Actions.Add(new ScrubAction("update-rels", relsName,
-                $"Удалено связей на удалённые части: {removed}"));
+                string.Format(L10n.Core_RelsDetail, removed)));
         }
 
         return Serialize(doc);

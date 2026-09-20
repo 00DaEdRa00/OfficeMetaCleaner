@@ -15,7 +15,7 @@ public static partial class MetadataScrubber
         if (replacesSource)
         {
             result.ReplacedInPlace = true;
-            result.Warnings.Add("Результат записывается поверх исходного файла.");
+            result.Warnings.Add(L10n.Core_InPlaceWarning);
         }
 
         var dropped = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -33,7 +33,7 @@ public static partial class MetadataScrubber
                 if (IsDroppedPart(name, options))
                 {
                     dropped.Add(name);
-                    result.Actions.Add(new ScrubAction("drop-part", name, "Метаданные контейнера удалены"));
+                    result.Actions.Add(new ScrubAction("drop-part", name, L10n.Core_DropPartDetail));
                 }
             }
 
@@ -89,7 +89,7 @@ public static partial class MetadataScrubber
                             {
                                 result.ScrubbedParts++;
                                 result.Actions.Add(new ScrubAction("strip-image-metadata", name,
-                                    "Удалены EXIF/XMP/комментарии изображения"));
+                                    L10n.Core_StripImageDetail));
                             }
 
                             using var destinationStream = created.Open();
@@ -121,7 +121,7 @@ public static partial class MetadataScrubber
         {
             TryDelete(tempPath);
             result.Success = false;
-            result.Warnings.Add($"Не удалось записать результат: {ex.Message}");
+            result.Warnings.Add(string.Format(L10n.Core_WriteFailed, ex.Message));
             return result;
         }
 

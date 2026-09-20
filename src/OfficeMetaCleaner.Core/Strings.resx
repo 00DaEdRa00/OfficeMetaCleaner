@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <!-- Ядро: результаты очистки -->
+  <data name="Core_FileNotFound" xml:space="preserve">
+    <value>Файл не найден: {0}</value>
+  </data>
+  <data name="Core_UnknownContainer" xml:space="preserve">
+    <value>Не удалось определить формат контейнера. Файл не изменён.</value>
+  </data>
+  <data name="Core_InPlaceWarning" xml:space="preserve">
+    <value>Результат записывается поверх исходного файла.</value>
+  </data>
+  <data name="Core_DropPartDetail" xml:space="preserve">
+    <value>Метаданные контейнера удалены</value>
+  </data>
+  <data name="Core_StripImageDetail" xml:space="preserve">
+    <value>Удалены EXIF/XMP/комментарии изображения</value>
+  </data>
+  <data name="Core_WriteFailed" xml:space="preserve">
+    <value>Не удалось записать результат: {0}</value>
+  </data>
+  <data name="Core_PartFailed" xml:space="preserve">
+    <value>Не удалось обработать часть {0}: {1}</value>
+  </data>
+  <data name="Core_ScrubXmlDetail" xml:space="preserve">
+    <value>Удалены атрибуты авторства/rsid</value>
+  </data>
+  <data name="Core_ContentTypesDetail" xml:space="preserve">
+    <value>Удалено переопределений: {0}</value>
+  </data>
+  <data name="Core_RelsDetail" xml:space="preserve">
+    <value>Удалено связей на удалённые части: {0}</value>
+  </data>
+  <data name="Core_PrivacyFlagDetail" xml:space="preserve">
+    <value>Включено удаление сведений о пользователе при сохранении</value>
+  </data>
+  <data name="Core_CfbWouldClear" xml:space="preserve">
+    <value>Поток будет заменён пустым property-set</value>
+  </data>
+  <data name="Core_CfbStreamMissing" xml:space="preserve">
+    <value>Поток {0} не найден.</value>
+  </data>
+  <data name="Core_CfbStreamSkipped" xml:space="preserve">
+    <value>Поток {0} не найден — пропущен.</value>
+  </data>
+  <data name="Core_CfbError" xml:space="preserve">
+    <value>Ошибка очистки CFB: {0}</value>
+  </data>
+  <data name="Core_CfbCleared" xml:space="preserve">
+    <value>Метаданные очищены ({0} -&gt; {1} байт, остаток обнулён)</value>
+  </data>
+  <data name="Core_AceWindowsOnly" xml:space="preserve">
+    <value>Очистка баз Access доступна только в Windows. Файл не изменён.</value>
+  </data>
+  <data name="Core_AceNoDriver" xml:space="preserve">
+    <value>Драйвер Access (DAO) не найден. Для .accdb/.mdb требуется установленный Microsoft Access или Microsoft Access Database Engine. Файл не изменён.</value>
+  </data>
+  <data name="Core_AceLaunchFailed" xml:space="preserve">
+    <value>Не удалось запустить DAO: {0}</value>
+  </data>
+  <data name="Core_AceNoEngine" xml:space="preserve">
+    <value>Не удалось создать объект DAO.</value>
+  </data>
+  <data name="Core_AceError" xml:space="preserve">
+    <value>Ошибка очистки базы Access: {0}</value>
+  </data>
+  <data name="Core_AceWouldDelete" xml:space="preserve">
+    <value>Свойство будет удалено</value>
+  </data>
+  <data name="Core_AceDeleted" xml:space="preserve">
+    <value>Свойство удалено</value>
+  </data>
+  <data name="Core_AceDeleteFailed" xml:space="preserve">
+    <value>Не удалось удалить {0}.{1}: {2}</value>
+  </data>
+  <data name="Core_NothingFound" xml:space="preserve">
+    <value>Нечего очищать: метаданных не найдено.</value>
+  </data>
+  <!-- Консоль: разбор аргументов и справка -->
+  <data name="Cli_UnknownCommand" xml:space="preserve">
+    <value>Неизвестная команда: {0}</value>
+  </data>
+  <data name="Cli_OutNeedsValue" xml:space="preserve">
+    <value>--out требует значение</value>
+  </data>
+  <data name="Cli_NoInput" xml:space="preserve">
+    <value>Не указан входной файл или папка.</value>
+  </data>
+  <data name="Cli_InPlaceOutConflict" xml:space="preserve">
+    <value>--in-place и --out несовместимы: при замене файла папка результата не используется.</value>
+  </data>
+  <data name="Cli_InvalidLang" xml:space="preserve">
+    <value>Неизвестный язык: {0} (допустимо: ru|en|auto).</value>
+  </data>
+  <data name="Cli_NoFiles" xml:space="preserve">
+    <value>Подходящих файлов Office не найдено.</value>
+  </data>
+  <data name="Cli_FoundFiles" xml:space="preserve">
+    <value>Найдено файлов: {0}</value>
+  </data>
+  <data name="Cli_BusyFiles" xml:space="preserve">
+    <value>Занятых файлов: {0} — сначала обработаю свободные.</value>
+  </data>
+  <data name="Cli_PathNotFound" xml:space="preserve">
+    <value>Путь не найден: {0}</value>
+  </data>
+  <data name="Cli_HelpAbout" xml:space="preserve">
+    <value>Удаляет метаданные из файлов Microsoft Office, сохраняя файлы рабочими.</value>
+  </data>
+  <data name="Cli_HelpFormats" xml:space="preserve">
+    <value>Поддерживаются OOXML (.docx .xlsx .pptx .vsdx и др.), legacy OLE/CFB (.doc .xls .ppt .vsd)</value>
+  </data>
+  <data name="Cli_HelpAccess" xml:space="preserve">
+    <value>и базы Microsoft Access (.accdb .mdb) — для последних нужен установленный Access/ACE.</value>
+  </data>
+  <data name="Cli_HelpOut" xml:space="preserve">
+    <value>  --out &lt;папка&gt;          куда писать результат (по умолчанию &lt;файл&gt;.clean рядом)</value>
+  </data>
+  <data name="Cli_HelpInPlace" xml:space="preserve">
+    <value>  --in-place             заменить исходный файл, не создавая копию</value>
+  </data>
+  <data name="Cli_HelpDryRun" xml:space="preserve">
+    <value>  --dry-run              показать, что будет удалено, не записывая файл</value>
+  </data>
+  <data name="Cli_HelpRecursive" xml:space="preserve">
+    <value>  --recursive            обходить папку рекурсивно</value>
+  </data>
+  <data name="Cli_HelpSignatures" xml:space="preserve">
+    <value>  --remove-signatures    удалять _xmlsignatures/* (делает подписи недействительными)</value>
+  </data>
+  <data name="Cli_HelpStrip" xml:space="preserve">
+    <value>  --strip-images         удалять EXIF/XMP у изображений внутри пакета (включено по умолчанию)</value>
+  </data>
+  <data name="Cli_HelpKeep" xml:space="preserve">
+    <value>  --keep-images          не трогать метаданные изображений</value>
+  </data>
+  <data name="Cli_HelpWait" xml:space="preserve">
+    <value>  --wait                 ждать закрытия занятых файлов (Ctrl+C — пропустить файл)</value>
+  </data>
+  <data name="Cli_HelpLang" xml:space="preserve">
+    <value>  --lang ru|en|auto      язык сообщений (по умолчанию auto — язык системы)</value>
+  </data>
+  <data name="Cli_Usage" xml:space="preserve">
+    <value>omc clean &lt;файл|папка&gt; [--out &lt;папка&gt;] [--in-place] [--dry-run] [--recursive] [--remove-signatures] [--strip-images|--keep-images] [--wait] [--lang ru|en|auto]</value>
+  </data>
+  <!-- Консоль: выполнение -->
+  <data name="Cli_WaitLocked" xml:space="preserve">
+    <value>Занят, жду закрытия: {0}</value>
+  </data>
+  <data name="Cli_WaitOfficeOpen" xml:space="preserve">
+    <value>  документ открыт в Office (есть файл блокировки) — закройте его</value>
+  </data>
+  <data name="Cli_WaitRunning" xml:space="preserve">
+    <value>  запущены: {0}</value>
+  </data>
+  <data name="Cli_WaitSkip" xml:space="preserve">
+    <value>  Ctrl+C — пропустить файл</value>
+  </data>
+  <data name="Cli_WaitCancelled" xml:space="preserve">
+    <value>  пропущен (ожидание отменено)</value>
+  </data>
+  <data name="Cli_WaitFreed" xml:space="preserve">
+    <value>  файл освобождён, обрабатываю…</value>
+  </data>
+  <data name="Cli_Error" xml:space="preserve">
+    <value>ОШИБКА: {0}</value>
+  </data>
+  <data name="Cli_Container" xml:space="preserve">
+    <value>Контейнер: {0}</value>
+  </data>
+  <data name="Cli_Dropped" xml:space="preserve">
+    <value>удалено частей: {0}</value>
+  </data>
+  <data name="Cli_Scrubbed" xml:space="preserve">
+    <value>очищено элементов: {0}</value>
+  </data>
+  <data name="Cli_Operations" xml:space="preserve">
+    <value>выполнено операций: {0}</value>
+  </data>
+  <data name="Cli_NothingToClean" xml:space="preserve">
+    <value>нечего очищать</value>
+  </data>
+  <data name="Cli_DryRunMode" xml:space="preserve">
+    <value>Режим dry-run: файл не записан.</value>
+  </data>
+  <data name="Cli_Replaced" xml:space="preserve">
+    <value>Файл заменён: {0}</value>
+  </data>
+  <data name="Cli_Written" xml:space="preserve">
+    <value>Записано: {0}</value>
+  </data>
+  <data name="Cli_NewSize" xml:space="preserve">
+    <value>Новый размер: {0} байт</value>
+  </data>
+  <data name="Cli_SizeBeforeAfter" xml:space="preserve">
+    <value>Размер: {0} -&gt; {1} байт</value>
+  </data>
+  <!-- GUI -->
+  <data name="Gui_Title" xml:space="preserve">
+    <value>OfficeMetaCleaner — очистка метаданных Office</value>
+  </data>
+  <data name="Gui_Subtitle" xml:space="preserve">
+    <value>Удаляет метаданные из файлов Microsoft Office, сохраняя файлы рабочими. Перетащите файлы или папки в окно.</value>
+  </data>
+  <data name="Gui_SettingsTip" xml:space="preserve">
+    <value>Настройки очистки</value>
+  </data>
+  <data name="Gui_OptImages" xml:space="preserve">
+    <value>Удалять EXIF изображений</value>
+  </data>
+  <data name="Gui_HintImages" xml:space="preserve">
+    <value>Удаляет скрытые данные фотографий внутри документа: место съёмки, модель камеры, дату. Сами картинки не меняются.</value>
+  </data>
+  <data name="Gui_OptSignatures" xml:space="preserve">
+    <value>Удалять цифровые подписи</value>
+  </data>
+  <data name="Gui_HintSignatures" xml:space="preserve">
+    <value>Удаляет встроенные цифровые подписи. Учтите: после любой очистки подписи всё равно становятся недействительными.</value>
+  </data>
+  <data name="Gui_OptWait" xml:space="preserve">
+    <value>Ждать закрытия занятых файлов</value>
+  </data>
+  <data name="Gui_HintWait" xml:space="preserve">
+    <value>Если файл открыт в Word или Excel, программа подождёт, пока вы его закроете, и почистит автоматически. Свободные файлы обрабатываются первыми.</value>
+  </data>
+  <data name="Gui_OptPrivacy" xml:space="preserve">
+    <value>Зачищать сведения о пользователе в Word/PowerPoint</value>
+  </data>
+  <data name="Gui_HintPrivacy" xml:space="preserve">
+    <value>Проставляет в файлах Word и PowerPoint отметку «удалять сведения об авторе при сохранении» — Office сам будет стирать ваше имя при каждом сохранении, даже после правок. В Excel такой отметки нет.</value>
+  </data>
+  <data name="Gui_Language" xml:space="preserve">
+    <value>Язык:</value>
+  </data>
+  <data name="Gui_LangSystem" xml:space="preserve">
+    <value>Система</value>
+  </data>
+  <data name="Gui_LangRestart" xml:space="preserve">
+    <value>Смена языка применится после перезапуска.</value>
+  </data>
+  <data name="Gui_ColFile" xml:space="preserve">
+    <value>Файл</value>
+  </data>
+  <data name="Gui_ColType" xml:space="preserve">
+    <value>Тип</value>
+  </data>
+  <data name="Gui_ColStatus" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="Gui_ColDetails" xml:space="preserve">
+    <value>Детали</value>
+  </data>
+  <data name="Gui_EmptyHint" xml:space="preserve">
+    <value>Перетащите сюда файлы .docx .xlsx .pptx .doc .xls .ppt — или добавьте их кнопками ниже</value>
+  </data>
+  <data name="Gui_FilesSection" xml:space="preserve">
+    <value>Работа с файлами</value>
+  </data>
+  <data name="Gui_InPlace" xml:space="preserve">
+    <value>Заменять исходные файлы</value>
+  </data>
+  <data name="Gui_Beside" xml:space="preserve">
+    <value>Результат рядом с исходником</value>
+  </data>
+  <data name="Gui_ToFolder" xml:space="preserve">
+    <value>В папку:</value>
+  </data>
+  <data name="Gui_AddFiles" xml:space="preserve">
+    <value>Добавить файлы</value>
+  </data>
+  <data name="Gui_AddFolder" xml:space="preserve">
+    <value>Добавить папку</value>
+  </data>
+  <data name="Gui_RemoveSelected" xml:space="preserve">
+    <value>Убрать выбранные</value>
+  </data>
+  <data name="Gui_ClearList" xml:space="preserve">
+    <value>Очистить список</value>
+  </data>
+  <data name="Gui_ResetMarks" xml:space="preserve">
+    <value>Сбросить отметки</value>
+  </data>
+  <data name="Gui_OpenResult" xml:space="preserve">
+    <value>Открыть результат</value>
+  </data>
+  <data name="Gui_Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="Gui_Clean" xml:space="preserve">
+    <value>Очистить метаданные</value>
+  </data>
+  <data name="Gui_NoFiles" xml:space="preserve">
+    <value>Файлы не выбраны</value>
+  </data>
+  <data name="Gui_SelectedN" xml:space="preserve">
+    <value>Выбрано файлов: {0}</value>
+  </data>
+  <data name="Gui_ProcessedOf" xml:space="preserve">
+    <value>Обработано {0} из {1}…</value>
+  </data>
+  <data name="Gui_DoneSummary" xml:space="preserve">
+    <value>Готово: очищено {0}, пропущено {1} из {2}</value>
+  </data>
+  <data name="Gui_AlreadyDone" xml:space="preserve">
+    <value> (ранее обработано, пропущено: {0})</value>
+  </data>
+  <data name="Gui_AllDone" xml:space="preserve">
+    <value>Все файлы из списка уже обработаны. Нажмите «Сбросить отметки», чтобы обработать их заново.</value>
+  </data>
+  <data name="Gui_NeedFolder" xml:space="preserve">
+    <value>Укажите папку для результата.</value>
+  </data>
+  <data name="Gui_NoOfficeFiles" xml:space="preserve">
+    <value>Подходящих файлов Office не найдено.</value>
+  </data>
+  <data name="Gui_NotProcessed" xml:space="preserve">
+    <value>Файл ещё не обработан — деталей пока нет.</value>
+  </data>
+  <data name="Status_Pending" xml:space="preserve">
+    <value>Ожидает</value>
+  </data>
+  <data name="Status_Waiting" xml:space="preserve">
+    <value>Ожидание</value>
+  </data>
+  <data name="Status_Processing" xml:space="preserve">
+    <value>Обработка</value>
+  </data>
+  <data name="Status_Done" xml:space="preserve">
+    <value>Готово</value>
+  </data>
+  <data name="Status_Skipped" xml:space="preserve">
+    <value>Пропущен</value>
+  </data>
+  <data name="Status_Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="Gui_WaitDetail" xml:space="preserve">
+    <value>Файл открыт — жду закрытия…</value>
+  </data>
+  <data name="Gui_CancelledDetail" xml:space="preserve">
+    <value>Ожидание отменено</value>
+  </data>
+  <data name="Gui_PickFilesTitle" xml:space="preserve">
+    <value>Выберите файлы Microsoft Office</value>
+  </data>
+  <data name="Gui_FilesFilter" xml:space="preserve">
+    <value>Файлы Office</value>
+  </data>
+  <data name="Gui_AllFiles" xml:space="preserve">
+    <value>Все файлы</value>
+  </data>
+  <data name="Gui_PickFolderTitle" xml:space="preserve">
+    <value>Выберите папку с файлами</value>
+  </data>
+  <data name="Gui_SaveTitle" xml:space="preserve">
+    <value>Куда сохранять результат</value>
+  </data>
+  <data name="Gui_DetailsTitle" xml:space="preserve">
+    <value>Детали очистки</value>
+  </data>
+  <data name="Gui_DetailsFor" xml:space="preserve">
+    <value>Детали — {0}</value>
+  </data>
+  <data name="Gui_Close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="Gui_DroppedParts" xml:space="preserve">
+    <value>удалено частей: {0}</value>
+  </data>
+  <data name="Gui_ScrubbedParts" xml:space="preserve">
+    <value>очищено элементов: {0}</value>
+  </data>
+  <data name="Gui_OperationsDone" xml:space="preserve">
+    <value>выполнено операций: {0}</value>
+  </data>
+  <data name="Gui_NothingToClean" xml:space="preserve">
+    <value>нечего очищать</value>
+  </data>
+  <data name="Gui_DryRunTag" xml:space="preserve">
+    <value> (тестовый режим)</value>
+  </data>
+  <data name="Gui_ReplacedTag" xml:space="preserve">
+    <value> → файл заменён</value>
+  </data>
+</root>

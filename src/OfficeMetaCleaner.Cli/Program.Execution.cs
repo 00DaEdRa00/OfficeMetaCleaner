@@ -11,24 +11,24 @@ internal static partial class Program
             return true;
 
         Console.WriteLine();
-        Console.WriteLine($"Занят, жду закрытия: {file}");
+        Console.WriteLine(string.Format(L10n.Cli_WaitLocked, file));
 
         if (FileBusy.FindOwnerFile(file) is not null)
-            Console.WriteLine("  документ открыт в Office (есть файл блокировки) — закройте его");
+            Console.WriteLine(L10n.Cli_WaitOfficeOpen);
 
         var apps = FileBusy.RunningOfficeApps();
         if (apps.Count > 0)
-            Console.WriteLine($"  запущены: {string.Join(", ", apps)}");
+            Console.WriteLine(string.Format(L10n.Cli_WaitRunning, string.Join(", ", apps)));
 
-        Console.WriteLine("  Ctrl+C — пропустить файл");
+        Console.WriteLine(L10n.Cli_WaitSkip);
 
         if (!FileBusy.WaitUntilFree(file, FileBusy.DefaultPollInterval, ct))
         {
-            Console.WriteLine("  пропущен (ожидание отменено)");
+            Console.WriteLine(L10n.Cli_WaitCancelled);
             return false;
         }
 
-        Console.WriteLine("  файл освобождён, обрабатываю…");
+        Console.WriteLine(L10n.Cli_WaitFreed);
         return true;
     }
 
@@ -44,19 +44,19 @@ internal static partial class Program
         }
         catch (Exception ex)
         {
-            Console.Error.WriteLine($"ОШИБКА: {ex.Message}");
+            Console.Error.WriteLine(string.Format(L10n.Cli_Error, ex.Message));
             return 1;
         }
 
-        Console.WriteLine($"Контейнер: {result.Container}");
+        Console.WriteLine(string.Format(L10n.Cli_Container, result.Container));
 
         var summary = new List<string>();
         if (result.DroppedParts > 0)
-            summary.Add($"удалено частей: {result.DroppedParts}");
+            summary.Add(string.Format(L10n.Cli_Dropped, result.DroppedParts));
         if (result.ScrubbedParts > 0)
-            summary.Add($"очищено элементов: {result.ScrubbedParts}");
+            summary.Add(string.Format(L10n.Cli_Scrubbed, result.ScrubbedParts));
         if (summary.Count == 0)
-            summary.Add(result.Actions.Count > 0 ? $"выполнено операций: {result.Actions.Count}" : "нечего очищать");
+            summary.Add(result.Actions.Count > 0 ? string.Format(L10n.Cli_Operations, result.Actions.Count) : L10n.Cli_NothingToClean);
 
         Console.WriteLine(string.Join("; ", summary));
 
@@ -68,13 +68,13 @@ internal static partial class Program
 
         if (options.DryRun)
         {
-            Console.WriteLine("Режим dry-run: файл не записан.");
+            Console.WriteLine(L10n.Cli_DryRunMode);
         }
         else if (result.Success && result.OutputPath is not null)
         {
             Console.WriteLine(result.ReplacedInPlace
-                ? $"Файл заменён: {result.OutputPath}"
-                : $"Записано: {result.OutputPath}");
+                ? string.Format(L10n.Cli_Replaced, result.OutputPath)
+                : string.Format(L10n.Cli_Written, result.OutputPath));
         }
 
         if (!result.Success)
@@ -84,9 +84,9 @@ internal static partial class Program
         {
             var after = new FileInfo(result.OutputPath ?? input).Length;
             if (result.ReplacedInPlace)
-                Console.WriteLine($"Новый размер: {after} байт");
+                Console.WriteLine(string.Format(L10n.Cli_NewSize, after));
             else
-                Console.WriteLine($"Размер: {new FileInfo(input).Length} -> {after} байт");
+                Console.WriteLine(string.Format(L10n.Cli_SizeBeforeAfter, new FileInfo(input).Length, after));
         }
 
         return 0;

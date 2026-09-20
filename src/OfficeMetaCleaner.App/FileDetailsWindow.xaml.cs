@@ -9,7 +9,8 @@ public partial class FileDetailsWindow : Window
     {
         InitializeComponent();
 
-        Title = $"Детали — {item.Name}";
+        Title = string.Format(L10n.Gui_DetailsFor, item.Name);
+        CloseButton.Content = L10n.Gui_Close;
         FileNameText.Text = item.FilePath;
         FileNameText.ToolTip = item.FilePath;
 

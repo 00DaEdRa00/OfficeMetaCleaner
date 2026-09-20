@@ -63,6 +63,15 @@
                 <DataTrigger Binding="{Binding Status}" Value="Пропущен">
                     <Setter Property="Foreground" Value="{StaticResource Warning}"/>
                 </DataTrigger>
+                <DataTrigger Binding="{Binding Status}" Value="Done">
+                    <Setter Property="Foreground" Value="{StaticResource Success}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Status}" Value="Error">
+                    <Setter Property="Foreground" Value="{StaticResource Danger}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Status}" Value="Skipped">
+                    <Setter Property="Foreground" Value="{StaticResource Warning}"/>
+                </DataTrigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>
@@ -83,7 +92,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Style="{StaticResource SubtitleText}" VerticalAlignment="Center"
+                <TextBlock x:Name="SubtitleText" Style="{StaticResource SubtitleText}" VerticalAlignment="Center"
                            Text="Удаляет метаданные из файлов Microsoft Office, сохраняя файлы рабочими. Перетащите файлы или папки в окно."/>
                 <Button x:Name="SettingsButton" Grid.Column="1" Click="SettingsButton_Click"
                         Style="{StaticResource SecondaryButton}"
@@ -99,7 +108,7 @@
                                   VerticalAlignment="Center"/>
                         <TextBlock Text="?" Style="{StaticResource HintIcon}">
                             <TextBlock.ToolTip>
-                                <TextBlock MaxWidth="280" TextWrapping="Wrap"
+                                <TextBlock x:Name="HintImagesText" MaxWidth="280" TextWrapping="Wrap"
                                            Text="Удаляет скрытые данные фотографий внутри документа: место съёмки, модель камеры, дату. Сами картинки не меняются."/>
                             </TextBlock.ToolTip>
                         </TextBlock>
@@ -109,7 +118,7 @@
                                   VerticalAlignment="Center"/>
                         <TextBlock Text="?" Style="{StaticResource HintIcon}">
                             <TextBlock.ToolTip>
-                                <TextBlock MaxWidth="280" TextWrapping="Wrap"
+                                <TextBlock x:Name="HintSignaturesText" MaxWidth="280" TextWrapping="Wrap"
                                            Text="Удаляет встроенные цифровые подписи. Учтите: после любой очистки подписи всё равно становятся недействительными."/>
                             </TextBlock.ToolTip>
                         </TextBlock>
@@ -119,7 +128,7 @@
                                   VerticalAlignment="Center"/>
                         <TextBlock Text="?" Style="{StaticResource HintIcon}">
                             <TextBlock.ToolTip>
-                                <TextBlock MaxWidth="280" TextWrapping="Wrap"
+                                <TextBlock x:Name="HintWaitText" MaxWidth="280" TextWrapping="Wrap"
                                            Text="Если файл открыт в Word или Excel, программа подождёт, пока вы его закроете, и почистит автоматически. Свободные файлы обрабатываются первыми."/>
                             </TextBlock.ToolTip>
                         </TextBlock>
@@ -129,11 +138,22 @@
                                   VerticalAlignment="Center"/>
                         <TextBlock Text="?" Style="{StaticResource HintIcon}">
                             <TextBlock.ToolTip>
-                                <TextBlock MaxWidth="280" TextWrapping="Wrap"
+                                <TextBlock x:Name="HintPrivacyText" MaxWidth="280" TextWrapping="Wrap"
                                            Text="Проставляет в файлах Word и PowerPoint отметку «удалять сведения об авторе при сохранении» — Office сам будет стирать ваше имя при каждом сохранении, даже после правок. В Excel такой отметки нет."/>
                             </TextBlock.ToolTip>
                         </TextBlock>
                     </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8" VerticalAlignment="Center">
+                        <TextBlock x:Name="LanguageLabel" Text="Язык:" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="LanguageBox" Margin="8,0,0,0" MinWidth="140"
+                                  VerticalAlignment="Center" SelectionChanged="LanguageBox_Changed">
+                            <ComboBoxItem Content="Система" Tag="auto"/>
+                            <ComboBoxItem Content="Русский" Tag="ru"/>
+                            <ComboBoxItem Content="English" Tag="en"/>
+                        </ComboBox>
+                    </StackPanel>
+                    <TextBlock x:Name="LangRestartHint" Style="{StaticResource SubtitleText}"
+                               Visibility="Collapsed" TextWrapping="Wrap" MaxWidth="300"/>
                 </StackPanel>
                 </Border>
             </Popup>
@@ -147,7 +167,7 @@
                           MouseDoubleClick="FilesGrid_DoubleClick"
                           AlternatingRowBackground="#FAFBFC">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Файл" Width="*">
+                        <DataGridTextColumn x:Name="FileColumn" Header="Файл" Width="*">
                             <DataGridTextColumn.Binding>
                                 <Binding Path="Name"/>
                             </DataGridTextColumn.Binding>
@@ -161,7 +181,7 @@
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
 
-                        <DataGridTextColumn Header="Тип" Width="170" Binding="{Binding Container}">
+                        <DataGridTextColumn x:Name="TypeColumn" Header="Тип" Width="170" Binding="{Binding Container}">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="VerticalAlignment" Value="Center"/>
@@ -170,7 +190,7 @@
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
 
-                        <DataGridTemplateColumn Header="Статус" Width="110">
+                        <DataGridTemplateColumn x:Name="StatusColumn" Header="Статус" Width="110">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Status}" Style="{StaticResource StatusText}"
@@ -179,7 +199,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Детали" Width="300">
+                        <DataGridTemplateColumn x:Name="DetailsColumn" Header="Детали" Width="300">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Content="{Binding Detail}"
@@ -208,7 +228,7 @@
         <!-- Настройки -->
         <Border Grid.Row="2" Style="{StaticResource Card}" Margin="0,14,0,0">
             <StackPanel>
-                <TextBlock Text="Работа с файлами" Style="{StaticResource SectionTitle}"/>
+                <TextBlock x:Name="FilesSectionText" Text="Работа с файлами" Style="{StaticResource SectionTitle}"/>
 
                 <WrapPanel Margin="0,0,0,10">
                     <CheckBox x:Name="InPlaceCheck" Content="Заменять исходные файлы"
@@ -245,11 +265,11 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" Orientation="Horizontal">
-                    <Button Content="Добавить файлы" Style="{StaticResource ToolbarButton}" Click="AddFiles_Click"/>
-                    <Button Content="Добавить папку" Style="{StaticResource ToolbarButton}" Margin="6,0,0,0" Click="AddFolder_Click"/>
-                    <Button Content="Убрать выбранные" Style="{StaticResource ToolbarButton}" Margin="6,0,0,0" Click="RemoveSelected_Click"/>
-                    <Button Content="Очистить список" Style="{StaticResource ToolbarButton}" Margin="6,0,0,0" Click="ClearList_Click"/>
-                    <Button Content="Сбросить отметки" Style="{StaticResource ToolbarButton}" Margin="6,0,0,0" Click="ResetMarks_Click"/>
+                    <Button x:Name="AddFilesButton" Content="Добавить файлы" Style="{StaticResource ToolbarButton}" Click="AddFiles_Click"/>
+                    <Button x:Name="AddFolderButton" Content="Добавить папку" Style="{StaticResource ToolbarButton}" Margin="6,0,0,0" Click="AddFolder_Click"/>
+                    <Button x:Name="RemoveSelectedButton" Content="Убрать выбранные" Style="{StaticResource ToolbarButton}" Margin="6,0,0,0" Click="RemoveSelected_Click"/>
+                    <Button x:Name="ClearListButton" Content="Очистить список" Style="{StaticResource ToolbarButton}" Margin="6,0,0,0" Click="ClearList_Click"/>
+                    <Button x:Name="ResetMarksButton" Content="Сбросить отметки" Style="{StaticResource ToolbarButton}" Margin="6,0,0,0" Click="ResetMarks_Click"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal">

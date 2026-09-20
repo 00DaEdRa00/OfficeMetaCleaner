@@ -27,7 +27,7 @@
                      ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
         </Border>
 
-        <Button Grid.Row="3" Content="Закрыть" Style="{StaticResource SecondaryButton}"
+        <Button x:Name="CloseButton" Grid.Row="3" Content="Закрыть" Style="{StaticResource SecondaryButton}"
                 HorizontalAlignment="Right" Margin="0,14,0,0" Padding="16,5"
                 IsDefault="True" IsCancel="True" Click="Close_Click"/>
     </Grid>

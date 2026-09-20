@@ -2,6 +2,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
+using OfficeMetaCleaner.Core;
 
 namespace OfficeMetaCleaner.App;
 
@@ -12,8 +13,8 @@ public partial class MainWindow : Window
         var dialog = new OpenFileDialog
         {
             Multiselect = true,
-            Title = "Выберите файлы Microsoft Office",
-            Filter = "Файлы Office|*.docx;*.docm;*.xlsx;*.xlsm;*.pptx;*.pptm;*.doc;*.xls;*.ppt;*.vsdx;*.vsd;*.accdb;*.mdb|Все файлы|*.*"
+            Title = L10n.Gui_PickFilesTitle,
+            Filter = $"{L10n.Gui_FilesFilter}|*.docx;*.docm;*.xlsx;*.xlsm;*.pptx;*.pptm;*.doc;*.xls;*.ppt;*.vsdx;*.vsd;*.accdb;*.mdb|{L10n.Gui_AllFiles}|*.*"
         };
 
         if (dialog.ShowDialog(this) == true)
@@ -22,7 +23,7 @@ public partial class MainWindow : Window
 
     private void AddFolder_Click(object sender, RoutedEventArgs e)
     {
-        var dialog = new OpenFolderDialog { Title = "Выберите папку с файлами" };
+        var dialog = new OpenFolderDialog { Title = L10n.Gui_PickFolderTitle };
         if (dialog.ShowDialog(this) == true)
             AddPaths(new[] { dialog.FolderName });
     }
@@ -69,7 +70,7 @@ public partial class MainWindow : Window
         UpdateUi();
 
         if (added == 0 && skipped > 0)
-            MessageBox.Show(this, "Подходящих файлов Office не найдено.", "OfficeMetaCleaner",
+            MessageBox.Show(this, L10n.Gui_NoOfficeFiles, "OfficeMetaCleaner",
                 MessageBoxButton.OK, MessageBoxImage.Information);
     }
 
@@ -114,7 +115,7 @@ public partial class MainWindow : Window
 
         foreach (var item in Items)
         {
-            item.Status = "Ожидает";
+            item.Status = L10n.StatusPending;
             item.Detail = "—";
             item.Result = null;
         }

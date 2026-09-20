@@ -98,7 +98,7 @@ public static partial class MetadataScrubber
 
         if (!File.Exists(inputPath))
         {
-            result.Warnings.Add($"Файл не найден: {inputPath}");
+            result.Warnings.Add(string.Format(L10n.Core_FileNotFound, inputPath));
             return result;
         }
 
@@ -124,7 +124,7 @@ public static partial class MetadataScrubber
 
             default:
                 result.Success = false;
-                result.Warnings.Add("Не удалось определить формат контейнера. Файл не изменён.");
+                result.Warnings.Add(L10n.Core_UnknownContainer);
                 return result;
         }
     }

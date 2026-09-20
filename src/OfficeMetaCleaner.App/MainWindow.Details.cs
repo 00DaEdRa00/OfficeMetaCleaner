@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using OfficeMetaCleaner.Core;
 
 namespace OfficeMetaCleaner.App;
 
@@ -28,7 +29,7 @@ public partial class MainWindow : Window
 
         if (item?.Result is null)
         {
-            MessageBox.Show(this, "Файл ещё не обработан — деталей пока нет.", "OfficeMetaCleaner",
+            MessageBox.Show(this, L10n.Gui_NotProcessed, "OfficeMetaCleaner",
                 MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
@@ -77,8 +78,8 @@ public partial class MainWindow : Window
         OpenResultButton.IsEnabled = !_busy && !string.IsNullOrWhiteSpace(_lastOutputDir);
 
         if (!_busy && Items.Count == 0)
-            SummaryText.Text = "Файлы не выбраны";
-        else if (!_busy && Items.All(i => i.Status == "Ожидает"))
-            SummaryText.Text = $"Выбрано файлов: {Items.Count}";
+            SummaryText.Text = L10n.Gui_NoFiles;
+        else if (!_busy && Items.All(i => i.Status == L10n.StatusPending))
+            SummaryText.Text = string.Format(L10n.Gui_SelectedN, Items.Count);
     }
 }

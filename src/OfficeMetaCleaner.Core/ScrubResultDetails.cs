@@ -17,7 +17,7 @@ public static class ScrubResultDetails
             lines.Add($"! {warning}");
 
         if (lines.Count == 0)
-            lines.Add("Нечего очищать: метаданных не найдено.");
+            lines.Add(L10n.Core_NothingFound);
 
         return lines;
     }

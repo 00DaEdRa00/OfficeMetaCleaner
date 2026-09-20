@@ -82,13 +82,13 @@ public static class AceDbScrubber
         if (replacesSource)
         {
             result.ReplacedInPlace = true;
-            result.Warnings.Add("Результат записывается поверх исходного файла.");
+            result.Warnings.Add(L10n.Core_InPlaceWarning);
         }
 
         if (!OperatingSystem.IsWindows())
         {
             result.Success = false;
-            result.Warnings.Add("Очистка баз Access доступна только в Windows. Файл не изменён.");
+            result.Warnings.Add(L10n.Core_AceWindowsOnly);
             return result;
         }
 
@@ -98,9 +98,7 @@ public static class AceDbScrubber
         if (engineType is null)
         {
             result.Success = false;
-            result.Warnings.Add(
-                "Драйвер Access (DAO) не найден. Для .accdb/.mdb требуется установленный Microsoft Access или " +
-                "Microsoft Access Database Engine. Файл не изменён.");
+            result.Warnings.Add(L10n.Core_AceNoDriver);
             return result;
         }
 
@@ -112,14 +110,14 @@ public static class AceDbScrubber
         catch (Exception ex)
         {
             result.Success = false;
-            result.Warnings.Add($"Не удалось запустить DAO: {ex.Message}");
+            result.Warnings.Add(string.Format(L10n.Core_AceLaunchFailed, ex.Message));
             return result;
         }
 
         if (engine is null)
         {
             result.Success = false;
-            result.Warnings.Add("Не удалось создать объект DAO.");
+            result.Warnings.Add(L10n.Core_AceNoEngine);
             return result;
         }
 
@@ -180,7 +178,7 @@ public static class AceDbScrubber
         catch (Exception ex)
         {
             result.Success = false;
-            result.Warnings.Add($"Ошибка очистки базы Access: {ex.Message}");
+            result.Warnings.Add(string.Format(L10n.Core_AceError, ex.Message));
         }
         finally
         {
@@ -205,7 +203,7 @@ public static class AceDbScrubber
             foreach (var property in removable)
             {
                 result.Actions.Add(new ScrubAction("would-clear-ace-property", $"{name}.{property}",
-                    "Свойство будет удалено"));
+                    L10n.Core_AceWouldDelete));
             }
         }
     }
@@ -228,11 +226,11 @@ public static class AceDbScrubber
                     document.Properties.Delete(property);
                     result.ScrubbedParts++;
                     result.Actions.Add(new ScrubAction("clear-ace-property", $"{name}.{property}",
-                        "Свойство удалено"));
+                        L10n.Core_AceDeleted));
                 }
                 catch (Exception ex)
                 {
-                    result.Warnings.Add($"Не удалось удалить {name}.{property}: {ex.Message}");
+                    result.Warnings.Add(string.Format(L10n.Core_AceDeleteFailed, name, property, ex.Message));
                 }
             }
         }

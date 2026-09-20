@@ -38,7 +38,7 @@ public static class CfbScrubber
         if (replacesSource)
         {
             result.ReplacedInPlace = true;
-            result.Warnings.Add("Результат записывается поверх исходного файла.");
+            result.Warnings.Add(L10n.Core_InPlaceWarning);
         }
 
         try
@@ -50,9 +50,9 @@ public static class CfbScrubber
                 {
                     if (HasStream(probe, name))
                         result.Actions.Add(new ScrubAction("would-clear-cfb-stream", name,
-                            "Поток будет заменён пустым property-set"));
+                            L10n.Core_CfbWouldClear));
                     else
-                        result.Warnings.Add($"Поток {name} не найден.");
+                        result.Warnings.Add(string.Format(L10n.Core_CfbStreamMissing, name));
                 }
 
                 result.Success = true;
@@ -71,10 +71,10 @@ public static class CfbScrubber
                 source.CopyTo(destination);
 
                 if (!OverwriteWithEmpty(destination, SummaryInformation, SummaryFmtId, result))
-                    result.Warnings.Add($"Поток {SummaryInformation} не найден — пропущен.");
+                    result.Warnings.Add(string.Format(L10n.Core_CfbStreamSkipped, SummaryInformation));
 
                 if (!OverwriteWithEmpty(destination, DocumentSummaryInformation, DocumentSummaryFmtId, result))
-                    result.Warnings.Add($"Поток {DocumentSummaryInformation} не найден — пропущен.");
+                    result.Warnings.Add(string.Format(L10n.Core_CfbStreamSkipped, DocumentSummaryInformation));
 
                 destination.Commit();
             }
@@ -87,7 +87,7 @@ public static class CfbScrubber
         catch (Exception ex)
         {
             result.Success = false;
-            result.Warnings.Add($"Ошибка очистки CFB: {ex.Message}");
+            result.Warnings.Add(string.Format(L10n.Core_CfbError, ex.Message));
         }
 
         return result;
@@ -139,7 +139,7 @@ public static class CfbScrubber
 
             result.ScrubbedParts++;
             result.Actions.Add(new ScrubAction("clear-cfb-stream", name,
-                $"Метаданные очищены ({originalLength} -> {totalLength} байт, остаток обнулён)"));
+                string.Format(L10n.Core_CfbCleared, originalLength, totalLength)));
         }
 
         return true;
