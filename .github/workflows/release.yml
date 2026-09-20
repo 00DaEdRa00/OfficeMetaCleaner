@@ -71,8 +71,9 @@ jobs:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path dist | Out-Null
-          Compress-Archive -Path publish-cli/omc.exe -DestinationPath dist/omc-win-x64.zip -Force
-          Compress-Archive -Path publish-gui/OfficeMetaCleaner.exe -DestinationPath dist/OfficeMetaCleaner-win-x64.zip -Force
+          Copy-Item docs/portable-README.txt dist/README.txt
+          Compress-Archive -Path publish-cli/omc.exe, dist/README.txt -DestinationPath dist/omc-win-x64.zip -Force
+          Compress-Archive -Path publish-gui/OfficeMetaCleaner.exe, dist/README.txt -DestinationPath dist/OfficeMetaCleaner-win-x64.zip -Force
           $lines = foreach ($f in Get-ChildItem dist/*.zip) {
             $h = (Get-FileHash $f.FullName -Algorithm SHA256).Hash.ToLower()
             "$h  $($f.Name)"
@@ -99,14 +100,16 @@ jobs:
           body: |
             ## OfficeMetaCleaner ${{ github.ref_name }} 🧹
 
-            Портабельные сборки для Windows x64 — .NET не нужен, просто скачайте и запускайте.
-            Portable builds for Windows x64 — no .NET required, just download and run.
+            Портабельные сборки для Windows x64 — .NET не нужен.
+            Portable builds for Windows x64 — no .NET required.
 
-            | Файл / File | Что это / What |
-            |---|---|
-            | `OfficeMetaCleaner-win-x64.zip` | 🖥️ Графическое приложение (WPF, drag & drop) / GUI app |
-            | `omc-win-x64.zip` | ⌨️ Консольная утилита `omc` / CLI tool |
-            | `checksums.txt` | SHA256-контрольные суммы / checksums |
+            - 🖥️ `OfficeMetaCleaner-win-x64.zip` — графическое приложение (GUI, drag & drop):
+              распаковать и запустить `OfficeMetaCleaner.exe` / unpack and run it.
+            - ⌨️ `omc-win-x64.zip` — КОНСОЛЬНАЯ утилита `omc` (терминал, скрипты):
+              распаковать и запускать из командной строки, например `omc clean --help` /
+              CONSOLE tool for terminal and scripts: unpack and run from the command line.
+            - В каждом архиве — краткая инструкция `README.txt` / each archive includes a quick-start `README.txt`.
+            - `checksums.txt` — SHA256-контрольные суммы / checksums.
 
             Проверка / Verify:
             `certutil -hashfile omc-win-x64.zip SHA256`

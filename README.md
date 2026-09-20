@@ -26,6 +26,7 @@
 
 > 📥 **Скачать готовое (Windows x64, .NET не нужен):** раздел
 > **Releases** репозитория — `OfficeMetaCleaner-win-x64.zip` (GUI) и `omc-win-x64.zip` (консоль).
+> Внутри каждого архива — краткая инструкция `README.txt`.
 > Каждый тег `v*.*.*` автоматически собирает свежие portable `.exe` через GitHub Actions.
 
 ---
@@ -255,7 +256,7 @@ dotnet publish src/OfficeMetaCleaner.App -c Release -r win-x64 --self-contained 
 
 > 🤖 **На GitHub это делает автоматика:** workflow `Release portable` (`.github/workflows/release.yml`)
 > на каждый тег `v*.*.*` гоняет тесты, публикует CLI + GUI (`win-x64`, self-contained, single-file),
-> упаковывает `omc-win-x64.zip` / `OfficeMetaCleaner-win-x64.zip` + `checksums.txt` и выкладывает в **Releases**.
+> упаковывает `omc-win-x64.zip` / `OfficeMetaCleaner-win-x64.zip` (в каждый кладёт `README.txt`) + `checksums.txt` и выкладывает в **Releases**.
 > Ручной запуск workflow — только сборка в Artifacts без создания релиза.
 >
 > ```bash
