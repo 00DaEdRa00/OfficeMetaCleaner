@@ -26,7 +26,6 @@
 
 > 📥 **Download ready builds (Windows x64, no .NET needed):** the
 > **Releases** page of this repo — `OfficeMetaCleaner-win-x64.zip` (GUI) and `omc-win-x64.zip` (CLI).
-> The console archive includes a quick-start `README.txt`.
 > Every `v*.*.*` tag automatically builds fresh portable `.exe` files via GitHub Actions.
 
 ---
@@ -248,7 +247,7 @@ You get self-contained `.exe` files for Windows x64. Debug `.pdb` symbols are no
 
 > 🤖 **On GitHub this is automated:** the `Release portable` workflow (`.github/workflows/release.yml`)
 > runs tests on every `v*.*.*` tag, publishes CLI + GUI (`win-x64`, self-contained, single-file),
-> packs `omc-win-x64.zip` / `OfficeMetaCleaner-win-x64.zip` (a `README.txt` goes into the console archive) + `checksums.txt` and uploads them to **Releases**.
+> packs `omc-win-x64.zip` / `OfficeMetaCleaner-win-x64.zip` + `checksums.txt` and uploads them to **Releases**.
 > A manual workflow run only builds into Artifacts without creating a release.
 >
 > ```bash

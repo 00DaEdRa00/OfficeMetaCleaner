@@ -71,8 +71,7 @@ jobs:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path dist | Out-Null
-          Copy-Item docs/portable-README.txt dist/README.txt
-          Compress-Archive -Path publish-cli/omc.exe, dist/README.txt -DestinationPath dist/omc-win-x64.zip -Force
+          Compress-Archive -Path publish-cli/omc.exe -DestinationPath dist/omc-win-x64.zip -Force
           Compress-Archive -Path publish-gui/OfficeMetaCleaner.exe -DestinationPath dist/OfficeMetaCleaner-win-x64.zip -Force
           $lines = foreach ($f in Get-ChildItem dist/*.zip) {
             $h = (Get-FileHash $f.FullName -Algorithm SHA256).Hash.ToLower()
@@ -108,7 +107,6 @@ jobs:
             - ⌨️ `omc-win-x64.zip` — КОНСОЛЬНАЯ утилита `omc` (терминал, скрипты):
               распаковать и запускать из командной строки, например `omc clean --help` /
               CONSOLE tool for terminal and scripts: unpack and run from the command line.
-            - В архиве консоли — краткая инструкция `README.txt` / the console archive includes a quick-start `README.txt`.
             - `checksums.txt` — SHA256-контрольные суммы / checksums.
 
             Проверка / Verify:
