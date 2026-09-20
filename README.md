@@ -77,7 +77,7 @@ flowchart LR
     F --> G[Чистый файл + отчёт]
 ```
 
-Никакой «пересборки документа сторонней библиотекой». Каждый формат чистится нативным для него способом:
+Каждый формат чистится нативным для него способом:
 
 ### 1. OOXML (`.docx .docm .xlsx .xlsm .pptx .pptm .vsdx` …) — хирургия ZIP/OPC-пакета
 
@@ -192,7 +192,7 @@ omc clean .\docs --recursive --remove-signatures
 omc clean отчет.xlsx --keep-images
 ```
 
-Вывод — построчный и честный:
+Вывод:
 
 ```text
 Найдено файлов: 3
@@ -243,25 +243,7 @@ dotnet publish src/OfficeMetaCleaner.App -c Release -r win-x64 --self-contained 
   -p:EnableCompressionInSingleFile=true -o publish-gui
 ```
 
-Получаются самодостаточные `.exe` для Windows x64. Отладочные `.pdb` в них не попадают — в папке лежит только исполняемый файл.
 
-> 🤖 **На GitHub это делает автоматика:** workflow `Release portable` (`.github/workflows/release.yml`)
-> на каждый тег `v*.*.*` гоняет тесты, публикует CLI + GUI (`win-x64`, self-contained, single-file),
-> упаковывает `omc-win-x64.zip` / `OfficeMetaCleaner-win-x64.zip` + `checksums.txt` и выкладывает в **Releases**.
-> Ручной запуск workflow — только сборка в Artifacts без создания релиза.
->
-> ```bash
-> git tag v1.0.0
-> git push origin v1.0.0
-> ```
->
-> CI (`ci.yml`) на каждый push/PR отдельно проверяет сборку и тесты.
-
-Иконка — `assets/app.ico` (исходник — `assets/app-source.jpeg`), встроена в оба `.exe`.
-
-> 💡 Если Debug-сборка GUI не стартует с «You must install or update .NET» — виновата переменная `DOTNET_ROOT` окружения (например, от AutoClaw), указывающая на рантайм без WindowsDesktop. Лечится запуском портативной сборки из `publish-gui\` либо `$env:DOTNET_ROOT = "C:\Program Files\dotnet"`. На консоль это не влияет.
-
----
 
 ## 🗂️ Структура решения
 
@@ -285,15 +267,6 @@ dotnet publish src/OfficeMetaCleaner.App -c Release -r win-x64 --self-contained 
 - `FileBusy.cs` — занятые файлы;
 - `ScrubResultDetails.cs` — единый формат отчёта для GUI и CLI.
 
----
-
-## 🧪 Проверено тестами
-
-`tests/OfficeMetaCleaner.Core.Tests` (xUnit) — чистка OOXML, legacy CFB, картинок, privacy-флагов, in-place записи, нейминга вывода, детекта Access и занятых файлов:
-
-```bash
-dotnet test OfficeMetaCleaner.sln
-```
 
 ---
 

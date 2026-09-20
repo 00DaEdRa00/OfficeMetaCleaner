@@ -77,7 +77,7 @@ flowchart LR
     F --> G[✅ Clean file + report]
 ```
 
-No "rebuilding the document with a third-party library". Each format is cleaned its native way:
+Each format is cleaned its native way:
 
 ### 1. OOXML (`.docx .docm .xlsx .xlsm .pptx .pptm .vsdx` …) — ZIP/OPC surgery
 
@@ -192,7 +192,7 @@ omc clean .\docs --recursive --remove-signatures
 omc clean report.xlsx --keep-images
 ```
 
-Output is line-by-line and honest:
+Output:
 
 ```text
 Found files: 3
@@ -243,25 +243,7 @@ dotnet publish src/OfficeMetaCleaner.App -c Release -r win-x64 --self-contained 
   -p:EnableCompressionInSingleFile=true -o publish-gui
 ```
 
-You get self-contained `.exe` files for Windows x64. Debug `.pdb` symbols are not included — the folder contains just the executable.
 
-> 🤖 **On GitHub this is automated:** the `Release portable` workflow (`.github/workflows/release.yml`)
-> runs tests on every `v*.*.*` tag, publishes CLI + GUI (`win-x64`, self-contained, single-file),
-> packs `omc-win-x64.zip` / `OfficeMetaCleaner-win-x64.zip` + `checksums.txt` and uploads them to **Releases**.
-> A manual workflow run only builds into Artifacts without creating a release.
->
-> ```bash
-> git tag v1.0.0
-> git push origin v1.0.0
-> ```
->
-> CI (`ci.yml`) separately verifies build and tests on every push/PR.
-
-Icon — `assets/app.ico` (source — `assets/app-source.jpeg`), embedded into both `.exe` files.
-
-> 💡 If the GUI Debug build fails to start with "You must install or update .NET", the `DOTNET_ROOT` env variable (e.g. set by AutoClaw) points to a runtime without WindowsDesktop. Fix: run the portable build from `publish-gui\` or set `$env:DOTNET_ROOT = "C:\Program Files\dotnet"`. The console is unaffected.
-
----
 
 ## 🗂️ Solution structure
 
@@ -285,15 +267,6 @@ Key core files:
 - `FileBusy.cs` — locked files;
 - `ScrubResultDetails.cs` — unified report format for GUI and CLI.
 
----
-
-## 🧪 Covered by tests
-
-`tests/OfficeMetaCleaner.Core.Tests` (xUnit) — OOXML scrubbing, legacy CFB, images, privacy flags, in-place writes, output naming, Access detection and locked files:
-
-```bash
-dotnet test OfficeMetaCleaner.sln
-```
 
 ---
 
