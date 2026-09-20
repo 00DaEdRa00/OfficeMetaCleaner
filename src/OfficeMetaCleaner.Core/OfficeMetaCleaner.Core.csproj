@@ -7,6 +7,8 @@
     <LangVersion>latest</LangVersion>
     <AssemblyName>OfficeMetaCleaner.Core</AssemblyName>
     <RootNamespace>OfficeMetaCleaner.Core</RootNamespace>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright (c) 2026 Snejniy 00DaEdRa00</Copyright>
   </PropertyGroup>
 
   <!-- Портативная сборка распространяется без отладочных символов -->

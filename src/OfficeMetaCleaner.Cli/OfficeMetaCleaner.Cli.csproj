@@ -8,6 +8,8 @@
     <LangVersion>latest</LangVersion>
     <AssemblyName>omc</AssemblyName>
     <RootNamespace>OfficeMetaCleaner.Cli</RootNamespace>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright (c) 2026 Snejniy 00DaEdRa00</Copyright>
     <InvariantGlobalization>true</InvariantGlobalization>
     <ApplicationIcon>..\..\assets\app.ico</ApplicationIcon>
   </PropertyGroup>

@@ -1,0 +1,114 @@
+name: Release portable
+
+# Запуск: пуш тега вида v1.0.0  →  сборка portable .exe и публикация в GitHub Releases.
+# Ручной запуск (Actions → Release portable → Run workflow) — только собирает
+# и кладёт zip в Artifacts, релиз не создаётся.
+#
+# Как выпустить релиз:
+#   git tag v1.0.0
+#   git push origin v1.0.0
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-portable:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Resolve version from tag
+        id: version
+        shell: pwsh
+        run: |
+          $ref = "${{ github.ref_name }}"
+          $ver = $ref -replace '^v', ''
+          if ($ref -notmatch '^v\d+\.\d+\.\d+') { $ver = "0.0.0-dev" }
+          "version=$ver" >> $env:GITHUB_OUTPUT
+          "tag=$ref" >> $env:GITHUB_OUTPUT
+          Write-Host "Version: $ver"
+
+      - name: Restore
+        run: dotnet restore OfficeMetaCleaner.sln
+
+      - name: Test
+        run: dotnet test OfficeMetaCleaner.sln -c Release
+
+      - name: Publish CLI (omc, win-x64, self-contained)
+        shell: pwsh
+        run: |
+          dotnet publish src/OfficeMetaCleaner.Cli -c Release -r win-x64 --self-contained true `
+            -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true `
+            -p:EnableCompressionInSingleFile=true `
+            -p:Version="${{ steps.version.outputs.version }}" `
+            -p:InformationalVersion="${{ steps.version.outputs.version }}+${{ github.sha }}" `
+            -o publish-cli
+          Get-ChildItem publish-cli
+
+      - name: Publish GUI (OfficeMetaCleaner, win-x64, self-contained)
+        shell: pwsh
+        run: |
+          dotnet publish src/OfficeMetaCleaner.App -c Release -r win-x64 --self-contained true `
+            -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true `
+            -p:EnableCompressionInSingleFile=true `
+            -p:Version="${{ steps.version.outputs.version }}" `
+            -p:InformationalVersion="${{ steps.version.outputs.version }}+${{ github.sha }}" `
+            -o publish-gui
+          Get-ChildItem publish-gui
+
+      - name: Pack zips + checksums
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path dist | Out-Null
+          Compress-Archive -Path publish-cli/omc.exe -DestinationPath dist/omc-win-x64.zip -Force
+          Compress-Archive -Path publish-gui/OfficeMetaCleaner.exe -DestinationPath dist/OfficeMetaCleaner-win-x64.zip -Force
+          $lines = foreach ($f in Get-ChildItem dist/*.zip) {
+            $h = (Get-FileHash $f.FullName -Algorithm SHA256).Hash.ToLower()
+            "$h  $($f.Name)"
+          }
+          $lines | Set-Content dist/checksums.txt
+          Get-ChildItem dist
+          Get-Content dist/checksums.txt
+
+      - name: Upload artifacts (ручной запуск / отладка)
+        uses: actions/upload-artifact@v4
+        with:
+          name: portable-win-x64
+          path: dist/*
+
+      - name: Create GitHub Release (только по тегу v*)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/omc-win-x64.zip
+            dist/OfficeMetaCleaner-win-x64.zip
+            dist/checksums.txt
+          generate_release_notes: true
+          body: |
+            ## OfficeMetaCleaner ${{ github.ref_name }} 🧹
+
+            Портабельные сборки для Windows x64 — .NET не нужен, просто скачайте и запускайте.
+            Portable builds for Windows x64 — no .NET required, just download and run.
+
+            | Файл / File | Что это / What |
+            |---|---|
+            | `OfficeMetaCleaner-win-x64.zip` | 🖥️ Графическое приложение (WPF, drag & drop) / GUI app |
+            | `omc-win-x64.zip` | ⌨️ Консольная утилита `omc` / CLI tool |
+            | `checksums.txt` | SHA256-контрольные суммы / checksums |
+
+            Проверка / Verify:
+            `certutil -hashfile omc-win-x64.zip SHA256`
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

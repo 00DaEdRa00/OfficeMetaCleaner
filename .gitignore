@@ -1,0 +1,24 @@
+# Build outputs — пересоздаются командой dotnet build / dotnet publish
+[Bb]in/
+[Oo]bj/
+
+# Портативные сборки (omc.exe ~34 МБ, OfficeMetaCleaner.exe ~68 МБ) —
+# собираются по README / GitHub Actions, в репозиторий не кладутся
+publish/
+publish-gui/
+publish-cli/
+dist/
+
+# Visual Studio / Rider
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Результаты тестов
+TestResults/
+*.trx
+*.coverage
+*.coveragexml

@@ -9,6 +9,8 @@
     <UseWPF>true</UseWPF>
     <AssemblyName>OfficeMetaCleaner</AssemblyName>
     <RootNamespace>OfficeMetaCleaner.App</RootNamespace>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright (c) 2026 Snejniy 00DaEdRa00</Copyright>
     <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
     <ApplicationIcon>..\..\assets\app.ico</ApplicationIcon>
   </PropertyGroup>

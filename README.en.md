@@ -17,6 +17,7 @@
   <img src="https://img.shields.io/badge/CLI-omc-black?style=flat-square&logo=windowsterminal&logoColor=white" alt="CLI" />
   <img src="https://img.shields.io/badge/Windows-x64-blue?style=flat-square" alt="Windows x64" />
   <img src="https://img.shields.io/badge/no_cloud-100%25_local-green?style=flat-square" alt="local" />
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square" alt="License: MIT" /></a>
 </p>
 
 <p align="center">
@@ -309,6 +310,14 @@ That's the NTFS file owner (ACL), not data inside `.accdb`/`.docx`. Metadata cle
 
 **What about cloud-based alternatives?**
 Everything here is local: the file is never uploaded anywhere. For contracts, CVs, court and corporate documents that is critical.
+
+---
+
+## 📄 License
+
+MIT © 2026 Snejniy 00DaEdRa00 — use, modify and distribute with the copyright notice kept. See [LICENSE](LICENSE).
+
+Third-party components: `OpenMcdf` (MPL-2.0). Access databases require an installed Microsoft Access / Access Database Engine — it is not distributed with this program.
 
 ---
 

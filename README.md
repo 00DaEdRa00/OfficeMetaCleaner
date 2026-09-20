@@ -17,6 +17,7 @@
   <img src="https://img.shields.io/badge/CLI-omc-black?style=flat-square&logo=windowsterminal&logoColor=white" alt="CLI" />
   <img src="https://img.shields.io/badge/Windows-x64-blue?style=flat-square" alt="Windows x64" />
   <img src="https://img.shields.io/badge/без_облака-100%25_локально-green?style=flat-square" alt="локально" />
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square" alt="License: MIT" /></a>
 </p>
 
 <p align="center">
@@ -312,6 +313,14 @@ dotnet test OfficeMetaCleaner.sln
 
 ---
 
+## 📄 Лицензия
+
+MIT © 2026 Snejniy 00DaEdRa00 — можно использовать, менять и распространять с сохранением копирайта. См. [LICENSE](LICENSE).
+
+Сторонние компоненты: `OpenMcdf` (MPL-2.0). Для баз Access нужен установленный Microsoft Access / Access Database Engine — он не распространяется с программой.
+
+---
+
 <p align="center">
-  <b>Кинул файл — получил чистый файл. Без облаков, без следов, без сюрпризов. </b>
+  <b>Кинул файл — получил чистый файл. Без облаков, без следов, без сюрпризов. 🧹</b>
 </p>
