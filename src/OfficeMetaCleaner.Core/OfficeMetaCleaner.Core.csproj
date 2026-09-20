@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>OfficeMetaCleaner.Core</AssemblyName>
+    <RootNamespace>OfficeMetaCleaner.Core</RootNamespace>
+  </PropertyGroup>
+
+  <!-- Портативная сборка распространяется без отладочных символов -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OpenMcdf" Version="3.3.0" />
+  </ItemGroup>
+
+</Project>
