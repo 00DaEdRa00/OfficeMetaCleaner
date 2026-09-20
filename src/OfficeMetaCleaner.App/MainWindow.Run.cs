@@ -13,7 +13,7 @@ public partial class MainWindow : Window
 
         var inPlace = InPlaceCheck.IsChecked == true;
         var all = Items.ToList();
-        var items = all.Where(i => !string.Equals(i.Status, L10n.StatusDone, StringComparison.Ordinal)).ToList();
+        var items = all.Where(i => i.Kind != ScrubStatus.Done).ToList();
         var alreadyDone = all.Count - items.Count;
 
         if (items.Count == 0)
@@ -74,7 +74,7 @@ public partial class MainWindow : Window
                 {
                     Dispatcher.Invoke(() =>
                     {
-                        item.Status = L10n.StatusWaiting;
+                        SetStatus(item, ScrubStatus.Waiting);
                         item.Detail = L10n.Gui_WaitDetail;
                     });
 
@@ -82,7 +82,7 @@ public partial class MainWindow : Window
                     {
                         Dispatcher.Invoke(() =>
                         {
-                            item.Status = L10n.StatusSkipped;
+                            SetStatus(item, ScrubStatus.Skipped);
                             item.Detail = L10n.Gui_CancelledDetail;
                             item.Result = null;
                             skipped++;
@@ -101,7 +101,7 @@ public partial class MainWindow : Window
 
                 Dispatcher.Invoke(() =>
                 {
-                    item.Status = L10n.StatusProcessing;
+                    SetStatus(item, ScrubStatus.Processing);
                     item.Detail = "…";
                 });
 
@@ -118,15 +118,16 @@ public partial class MainWindow : Window
                         item.Container = result.Container;
                         item.OutputPath = result.OutputPath;
                         item.Result = result;
+                        item.UsedOptions = options;
 
                         if (result.Success)
                         {
-                            item.Status = L10n.StatusDone;
+                            SetStatus(item, ScrubStatus.Done);
                             succeeded++;
                         }
                         else
                         {
-                            item.Status = L10n.StatusSkipped;
+                            SetStatus(item, ScrubStatus.Skipped);
                             skipped++;
                         }
 
@@ -137,7 +138,7 @@ public partial class MainWindow : Window
                 {
                     Dispatcher.Invoke(() =>
                     {
-                        item.Status = L10n.StatusError;
+                        SetStatus(item, ScrubStatus.Error);
                         skipped++;
                         item.Detail = ex.Message;
                     });

@@ -663,14 +663,6 @@ internal class Strings
         }
     }
 
-    internal static string Gui_LangRestart
-    {
-        get
-        {
-            return ResourceManager.GetString("Gui_LangRestart", resourceCulture);
-        }
-    }
-
     internal static string Gui_ColFile
     {
         get

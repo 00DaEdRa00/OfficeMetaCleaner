@@ -69,7 +69,7 @@ public static class L10n
         "Gui_Title", "Gui_Subtitle", "Gui_SettingsTip",
         "Gui_OptImages", "Gui_HintImages", "Gui_OptSignatures", "Gui_HintSignatures",
         "Gui_OptWait", "Gui_HintWait", "Gui_OptPrivacy", "Gui_HintPrivacy",
-        "Gui_Language", "Gui_LangSystem", "Gui_LangRestart",
+        "Gui_Language", "Gui_LangSystem",
         "Gui_ColFile", "Gui_ColType", "Gui_ColStatus", "Gui_ColDetails",
         "Gui_EmptyHint", "Gui_FilesSection", "Gui_InPlace", "Gui_Beside", "Gui_ToFolder",
         "Gui_AddFiles", "Gui_AddFolder", "Gui_RemoveSelected", "Gui_ClearList", "Gui_ResetMarks",
@@ -176,7 +176,6 @@ public static class L10n
     public static string Gui_HintPrivacy => Strings.Gui_HintPrivacy;
     public static string Gui_Language => Strings.Gui_Language;
     public static string Gui_LangSystem => Strings.Gui_LangSystem;
-    public static string Gui_LangRestart => Strings.Gui_LangRestart;
     public static string Gui_ColFile => Strings.Gui_ColFile;
     public static string Gui_ColType => Strings.Gui_ColType;
     public static string Gui_ColStatus => Strings.Gui_ColStatus;

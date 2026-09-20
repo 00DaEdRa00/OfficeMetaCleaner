@@ -247,9 +247,6 @@
   <data name="Gui_LangSystem" xml:space="preserve">
     <value>System</value>
   </data>
-  <data name="Gui_LangRestart" xml:space="preserve">
-    <value>The language change applies after restart.</value>
-  </data>
   <data name="Gui_ColFile" xml:space="preserve">
     <value>File</value>
   </data>

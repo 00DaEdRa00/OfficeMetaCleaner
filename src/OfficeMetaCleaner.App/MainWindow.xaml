@@ -152,8 +152,6 @@
                             <ComboBoxItem Content="English" Tag="en"/>
                         </ComboBox>
                     </StackPanel>
-                    <TextBlock x:Name="LangRestartHint" Style="{StaticResource SubtitleText}"
-                               Visibility="Collapsed" TextWrapping="Wrap" MaxWidth="300"/>
                 </StackPanel>
                 </Border>
             </Popup>

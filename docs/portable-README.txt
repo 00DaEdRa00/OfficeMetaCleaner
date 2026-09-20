@@ -13,7 +13,7 @@ OfficeMetaCleaner — portable (Windows x64, .NET не нужен / no .NET need
 
 Язык: авто (на англоязычной Windows — английский, иначе русский),
 переопределение: --lang ru|en|auto. Язык GUI — в настройках (шестерёнка),
-применяется после перезапуска.
+переключается на лету, без перезапуска.
 Полная документация: README.md / README.en.md в репозитории.
 
 [EN]
@@ -28,5 +28,5 @@ This archive is one of two:
 
 Language: auto (English on English Windows, Russian otherwise),
 override: --lang ru|en|auto. GUI language is in settings (gear button),
-applies after restart.
+switches live, no restart needed.
 Full docs: README.md / README.en.md in the repository.

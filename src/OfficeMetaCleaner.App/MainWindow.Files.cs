@@ -115,7 +115,7 @@ public partial class MainWindow : Window
 
         foreach (var item in Items)
         {
-            item.Status = L10n.StatusPending;
+            SetStatus(item, ScrubStatus.Pending);
             item.Detail = "—";
             item.Result = null;
         }

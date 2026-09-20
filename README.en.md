@@ -156,7 +156,7 @@ Settings:
 - wait for locked files to close *(off)*
 - strip personal info in Word/PowerPoint *(on)*
 - replace source files *(off — copies are written by default)*
-- 🌐 UI language: system / Russian / English *(default — system language; change applies after restart)*
+- 🌐 UI language: system / Russian / English *(default — system language; switches live, no restart)*
 
 Output behavior:
 

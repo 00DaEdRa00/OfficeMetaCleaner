@@ -32,8 +32,40 @@ public partial class MainWindow : Window
         };
 
         LanguageStorage.Save(preference);
-        LangRestartHint.Text = L10n.Gui_LangRestart;
-        LangRestartHint.Visibility = Visibility.Visible;
+        L10n.Apply(preference);
+        RefreshLanguageLive();
+    }
+
+    /// <summary>
+    /// Живое переключение языка: хром, статусы и итоги пересчитываются сразу,
+    /// без перезапуска. Подписи самих отчётов (строки ядра) обновятся при
+    /// следующем прогоне — они запекаются в момент очистки.
+    /// </summary>
+    private void RefreshLanguageLive()
+    {
+        ApplyTexts();
+        foreach (var item in Items)
+        {
+            SetStatus(item, item.Kind);
+            if (item.Result is not null)
+                item.Detail = BuildDetail(item.Result, item.UsedOptions ?? new ScrubOptions());
+        }
+        UpdateUi();
+    }
+
+    private static void SetStatus(ScrubItem item, ScrubStatus kind)
+    {
+        item.Kind = kind;
+        item.Status = kind switch
+        {
+            ScrubStatus.Pending => L10n.StatusPending,
+            ScrubStatus.Waiting => L10n.StatusWaiting,
+            ScrubStatus.Processing => L10n.StatusProcessing,
+            ScrubStatus.Done => L10n.StatusDone,
+            ScrubStatus.Skipped => L10n.StatusSkipped,
+            ScrubStatus.Error => L10n.StatusError,
+            _ => L10n.StatusPending
+        };
     }
 
     /// <summary>

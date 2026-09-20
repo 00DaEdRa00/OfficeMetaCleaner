@@ -79,7 +79,7 @@ public partial class MainWindow : Window
 
         if (!_busy && Items.Count == 0)
             SummaryText.Text = L10n.Gui_NoFiles;
-        else if (!_busy && Items.All(i => i.Status == L10n.StatusPending))
+        else if (!_busy && Items.All(i => i.Kind == ScrubStatus.Pending))
             SummaryText.Text = string.Format(L10n.Gui_SelectedN, Items.Count);
     }
 }

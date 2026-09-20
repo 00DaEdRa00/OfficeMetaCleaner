@@ -5,6 +5,17 @@ using OfficeMetaCleaner.Core;
 
 namespace OfficeMetaCleaner.App;
 
+/// <summary>Статус строки как языконезависимый ключ (сама подпись берётся из L10n).</summary>
+public enum ScrubStatus
+{
+    Pending,
+    Waiting,
+    Processing,
+    Done,
+    Skipped,
+    Error
+}
+
 /// <summary>Строка списка файлов в окне.</summary>
 public sealed class ScrubItem : INotifyPropertyChanged
 {
@@ -15,6 +26,7 @@ public sealed class ScrubItem : INotifyPropertyChanged
     public ScrubItem(string filePath)
     {
         FilePath = filePath;
+        Kind = ScrubStatus.Pending;
         _status = L10n.StatusPending;
     }
 
@@ -41,6 +53,12 @@ public sealed class ScrubItem : INotifyPropertyChanged
     }
 
     public string? OutputPath { get; set; }
+
+    /// <summary>Статус-ключ для переживания смены языка.</summary>
+    public ScrubStatus Kind { get; set; }
+
+    /// <summary>Опции прогона — чтобы пересчитать подпись после смены языка.</summary>
+    public ScrubOptions? UsedOptions { get; set; }
 
     /// <summary>Полный результат последней обработки для окна деталей.</summary>
     public ScrubResult? Result { get; set; }
