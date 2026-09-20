@@ -156,7 +156,6 @@ Settings:
 - wait for locked files to close *(off)*
 - strip personal info in Word/PowerPoint *(on)*
 - replace source files *(off — copies are written by default)*
-- 🌐 UI language: system / Russian / English *(default — system language; switches live, no restart)*
 
 Output behavior:
 
@@ -205,13 +204,6 @@ Found files: 3
 ```
 
 `Ctrl+C` during `--wait` cleanly skips the currently locked file.
-
-🌐 **Message language** — auto: English on English-language Windows, Russian otherwise.
-The console overrides it with `--lang ru|en|auto`:
-
-```bash
-omc clean contract.docx --dry-run --lang ru
-```
 
 ---
 
