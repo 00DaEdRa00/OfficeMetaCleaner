@@ -28,7 +28,14 @@ public sealed class LocalizationTests
             .OrderBy(n => n, StringComparer.Ordinal)
             .ToList();
 
-        var keys = L10n.AllKeys.OrderBy(k => k, StringComparer.Ordinal).ToList();
+        // свойства статусов идут без подчёркивания (StatusDone),
+        // хотя ключи словарей — с ним (Status_Done)
+        var keys = L10n.AllKeys
+            .Select(k => k.StartsWith("Status_", StringComparison.Ordinal)
+                ? k.Replace("Status_", "Status", StringComparison.Ordinal)
+                : k)
+            .OrderBy(k => k, StringComparer.Ordinal)
+            .ToList();
 
         Assert.Equal(keys, props);
     }
